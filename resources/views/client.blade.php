@@ -8,11 +8,9 @@
     <title>Laravel Simple CRM</title>
 </head>
 <body>
-    <h1>Welcome</h1>
 
-    @foreach ($clients as $client)
-        {{ $client->name }}
-        <br>
-    @endforeach
+    {{ $client->name }}
+    <br>
+
 </body>
 </html>

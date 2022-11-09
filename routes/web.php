@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\ProjectStatus;
+use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('index', [
+        'clients' => Client::all(),
+    ]);
 });
 
-//Route:get('/dashboard', function () {
-//    return view('dashboard');
-//});
+Route::get('/client/{client}', function (Client $client) {
+    return view('client', [
+        'client' => $client
+    ]);
+});
