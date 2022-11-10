@@ -25,14 +25,14 @@ class ClientController extends Controller
     public function store()
     {
 
-        $client = new Client;
+        $attributes = request()->validate([
+            'name' => 'required|min:3|max:255',
+            'logo' => 'required',
+            'slug' => 'required|min:3|max:255',
+            'website' => 'nullable'
+        ]);
 
-        $client->name = request('name');
-        $client->logo = request('logo');
-        $client->slug = request('slug');
-        $client->website = request('website');
-
-        $client->save();
+        Client::create($attributes);
 
         return redirect('/clients');
     }

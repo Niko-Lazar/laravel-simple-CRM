@@ -10,7 +10,9 @@
             @foreach($clients as $client)
                 <tr>
                     <td>
-                        <a href="/clients/{{ $client->slug }}">
+                        <a href="/clients/{{ $client->slug }}"
+                        class="btn btn-primary"
+                        >
                             {{ $client->name }}
                         </a>
                     </td>
