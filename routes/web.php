@@ -1,7 +1,6 @@
 <?php
 
-use App\Enums\ProjectStatus;
-use App\Models\Client;
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,14 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index', [
-        'clients' => Client::all(),
-    ]);
-});
+// Clients
+Route::get('/clients', [ClientController::class, 'index'])->name('clients');
+Route::get('/clients/{client:slug}', [ClientController::class, 'show']);
+Route::get('client/create', [ClientController::class, 'create'])->name('create_client');
+Route::get('client/edit/{client:slug}', [ClientController::class, 'edit']);
 
-Route::get('/client/{client}', function (Client $client) {
-    return view('client', [
-        'client' => $client
-    ]);
-});
+Route::post('/clients/store', [ClientController::class, 'store'])->name('store_client');
+Route::post('/clients/{client}', [ClientController::class, 'destroy'])->name('destroy_client');

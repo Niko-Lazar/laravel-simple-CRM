@@ -9,4 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class);
+    }
 }
