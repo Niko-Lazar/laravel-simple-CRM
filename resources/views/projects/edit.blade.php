@@ -1,11 +1,11 @@
 <x-layout>
     <div class="container">
-        <form method="POST" action="/projects">
+        <form method="POST" action="/projects/{{ $project->slug }}">
             @csrf
-
+            @method('PATCH')
             <div class="rendered-form">
                 <div class="">
-                    <h1 access="false" id="control-6788589">Add project</h1>
+                    <h1 access="false" id="control-6788589">Edit project</h1>
                 </div>
 
                 <div class="formbuilder-text form-group field-title">
@@ -15,7 +15,7 @@
                         placeholder="title"
                         class="form-control"
                         name="title"
-                        value="{{ old('title') }}"
+                        value="{{ $project->title }}"
                         access="false" id="title" title="Project title" required="required" aria-required="true">
                 </div>
 
@@ -26,7 +26,7 @@
                         placeholder="slug"
                         class="form-control"
                         name="slug"
-                        value="{{ old('slug') }}"
+                        value="{{ $project->slug }}"
                         access="false" id="slug" required="required" aria-required="true">
                 </div>
 
@@ -37,7 +37,7 @@
                         placeholder="description"
                         class="form-control"
                         name="description"
-                        value="{{ old('description') }}"
+                        value="{{ $project->description }}"
                         access="false" id="description" title="project description" required="required" aria-required="true">
                 </div>
 
@@ -48,7 +48,7 @@
                         class="form-control"
                         name="deadline"
                         access="false"
-                        value="{{ old('deadline') }}"
+                        value="{{ $project->deadline }}"
                         id="deadline" required="required" aria-required="true">
                 </div>
 
@@ -62,7 +62,7 @@
                                 id="status-0"
                                 value="finished"
                                 type="checkbox"
-                                {{ (old('status') == 'finished') ? 'checked' : null }}
+                                {{ ($project->status->value == 'finished') ? 'checked' : null }}
                             >
                             <label for="status-0">Finished project</label>
                         </div>
@@ -76,14 +76,15 @@
                         <option value="" selected="true" disabled>--select client--</option>
                         @foreach($clients as $client)
                             <option value="{{ $client->id }}"
-                                {{(old('client_id') == $client->id) ? 'selected' : null }}
-                            >{{ $client->name }}</option>
+                                {{ ($project->client_id == $client->id) ? 'selected' : null }}
+                            >{{ $client->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="formbuilder-button form-group field-submit">
-                    <button type="submit" class="btn-info btn mt-4" name="submit" access="false" style="info" id="submit">Add project</button>
+                    <button type="submit" class="btn-info btn mt-4" name="submit" access="false" id="submit">Update project</button>
                 </div>
             </div>
 

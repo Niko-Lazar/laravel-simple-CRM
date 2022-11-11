@@ -24,13 +24,21 @@
                     <td>{{ $project->deadline }}</td>
                     <td>{{ $project->status }}</td>
                     <td>{{ $project->client->name }}</td>
-                    <td>edit</td>
-                    <td>delete</td>
+                    <td>
+                        <a class="btn btn-warning" href="projects/{{ $project->slug }}/edit">Edit</a>
+                    </td>
+                    <td>
+                        <form action="projects/{{ $project->slug }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>
         <div>
-            <a href="">add project</a>
+            <a href="projects/create">add project</a>
         </div>
     </div>
 </x-layout>
