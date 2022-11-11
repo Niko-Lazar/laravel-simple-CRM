@@ -27,7 +27,7 @@ class ClientController extends Controller
         $attributes = request()->validate([
             'name' => 'required|min:3|max:255',
             'logo' => 'required|image',
-            'slug' => 'required|min:3|max:255',
+            'slug' => 'required|min:3|max:255|unique:clients,slug',
             'website' => 'nullable'
         ]);
 
@@ -47,10 +47,12 @@ class ClientController extends Controller
     {
         $attributes = request()->validate([
             'name' => 'required|min:3|max:255',
-            'logo' => 'required',
-            'slug' => 'required|min:3|max:255',
+            'logo' => 'required|image',
+            'slug' => 'required|min:3|max:255|unique:clients,slug',
             'website' => 'nullable'
         ]);
+
+        $attributes['logo'] = request()->file('logo')->store('logos');
 
         $client->update($attributes);
 

@@ -20,9 +20,15 @@
                     <input type="text" placeholder="url" class="form-control" name="website" access="false" id="website" title="website url">
                 </div>
                 <div class="formbuilder-button form-group field-submit">
-                    <button type="submit" class="btn-info btn" name="submit" access="false" style="info" id="submit">Add client</button>
+                    <button type="submit" class="btn-info btn mt-3" name="submit" access="false" style="info" id="submit">Add client</button>
                 </div>
             </div>
+
+            <ul class="mt-3">
+                @foreach($errors->all() as $error)
+                    <li class="text-danger">{{ $error }}</li>
+                @endforeach
+            </ul>
         </form>
     </div>
 </x-layout>

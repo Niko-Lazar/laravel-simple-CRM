@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 // Clients
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
 Route::get('/clients/{client:slug}', [ClientController::class, 'show']);
-Route::get('client/create', [ClientController::class, 'create'])->name('create_client');
-Route::get('client/edit/{client:slug}', [ClientController::class, 'edit']);
+Route::get('/create', [ClientController::class, 'create'])->name('create_client');
+Route::get('/edit/{client:slug}', [ClientController::class, 'edit']);
 
 Route::post('/clients/store', [ClientController::class, 'store'])->name('store_client');
 Route::post('/clients/{client}/update', [ClientController::class, 'update']);

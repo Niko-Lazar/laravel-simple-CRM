@@ -15,4 +15,15 @@ class Client extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    // accessors
+    public function getNameAttribute($name)
+    {
+        return ucwords($name);
+    }
+
+    public function getSlugAttribute($slug)
+    {
+        return strtolower($slug);
+    }
 }
