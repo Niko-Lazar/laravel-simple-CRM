@@ -24,7 +24,27 @@ class ClientController extends Controller
 
     public function store()
     {
+        $attributes = request()->validate([
+            'name' => 'required|min:3|max:255',
+            'logo' => 'required|image',
+            'slug' => 'required|min:3|max:255',
+            'website' => 'nullable'
+        ]);
 
+        $attributes['logo'] = request()->file('logo')->store('logos');
+
+        Client::create($attributes);
+
+        return redirect('/clients');
+    }
+
+    public function edit(Client $client)
+    {
+        return view('client.edit', ['client' => $client]);
+    }
+
+    public function update(Client $client)
+    {
         $attributes = request()->validate([
             'name' => 'required|min:3|max:255',
             'logo' => 'required',
@@ -32,14 +52,9 @@ class ClientController extends Controller
             'website' => 'nullable'
         ]);
 
-        Client::create($attributes);
+        $client->update($attributes);
 
         return redirect('/clients');
-    }
-
-    public function edit(CLient $client)
-    {
-        return view('client.edit', ['client' => $client]);
     }
 
     public function destroy(Client $client)

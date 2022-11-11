@@ -21,4 +21,5 @@ Route::get('client/create', [ClientController::class, 'create'])->name('create_c
 Route::get('client/edit/{client:slug}', [ClientController::class, 'edit']);
 
 Route::post('/clients/store', [ClientController::class, 'store'])->name('store_client');
-Route::post('/clients/{client}', [ClientController::class, 'destroy'])->name('destroy_client');
+Route::post('/clients/{client}/update', [ClientController::class, 'update']);
+Route::post('/clients/{client}', [ClientController::class, 'destroy']);

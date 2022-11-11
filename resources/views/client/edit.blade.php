@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container">
-        <form method="POST" action="">
+        <form method="POST" action="/clients/{{ $client->id }}/update">
             @csrf
             <div class="rendered-form">
                 <div class="formbuilder-text form-group field-name">
