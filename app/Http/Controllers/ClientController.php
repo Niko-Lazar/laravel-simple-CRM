@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ClientController extends Controller
 {
@@ -47,12 +48,14 @@ class ClientController extends Controller
     {
         $attributes = request()->validate([
             'name' => 'required|min:3|max:255',
-            'logo' => 'required|image',
-            'slug' => 'required|min:3|max:255|unique:clients,slug',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'slug' => ['required', Rule::unique('clients', 'slug')->ignore($client)],
             'website' => 'nullable'
         ]);
 
-        $attributes['logo'] = request()->file('logo')->store('logos');
+        if(isset($attributes['logo'])) {
+            $attributes['logo'] = request()->file('logo')->store('logos');
+        }
 
         $client->update($attributes);
 

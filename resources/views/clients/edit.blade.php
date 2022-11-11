@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container">
-        <form method="POST" action="/clients/{{ $client->id }}/update">
+        <form method="POST" action="/clients/{{ $client->slug }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="rendered-form">
@@ -14,15 +14,22 @@
                         value="{{ $client->name }}"
                         access="false" maxlength="255" id="name" title="client's name" required="required" aria-required="true">
                 </div>
-                <div class="formbuilder-text form-group field-logo">
-                    <label for="logo" class="formbuilder-text-label">Logo<span class="formbuilder-required">*</span><span class="tooltip-element" tooltip="logo link">?</span></label>
-                    <input type="text"
-                           placeholder="your logo"
-                           class="form-control"
-                           name="logo"
-                           value="{{ $client->logo }}"
-                           access="false" id="logo" title="logo link" required="required" aria-required="true">
+
+                <div class="formbuilder-file form-group field-logo">
+                    <label for="logo" class="formbuilder-file-label">Upload logo<span class="formbuilder-required">*</span></label>
+                    <input
+                        type="file"
+                        class="form-control"
+                        name="logo"
+                        access="false"
+                        multiple="false" id="logo" required="required" aria-required="true">
+                    <img
+                        src="{{ asset('storage/' . $client->logo) }}"
+                        alt="logo" width="65px" height="64px"
+                        class="rounded p-1"
+                    >
                 </div>
+
                 <div class="formbuilder-text form-group field-slug">
                     <label for="slug" class="formbuilder-text-label">Slug<span class="formbuilder-required">*</span></label>
                     <input
@@ -47,6 +54,15 @@
                     <button type="submit" class="btn-info btn" name="submit" access="false" style="info" id="submit">Update</button>
                 </div>
             </div>
+
+            @if($errors->any())
+                <ul class="mt-3">
+                    @foreach($errors->all() as $error)
+                        <li class="text-danger">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
         </form>
+        <a href="/clients" >back</a>
     </div>
 </x-layout>
