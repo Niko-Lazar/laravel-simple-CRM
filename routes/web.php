@@ -20,3 +20,5 @@ Route::resource('clients', ClientController::class);
 
 // Projects
 Route::get('/projects', [ProjectController::class, 'index']);
+Route::get('/projects/create', [ProjectController::class, 'create']);
+Route::get('/projects/{project}', [ProjectController::class, 'show']);

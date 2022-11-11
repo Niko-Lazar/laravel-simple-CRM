@@ -16,6 +16,11 @@ class Project extends Model
         'status' => ProjectStatusEnum::class
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class);
