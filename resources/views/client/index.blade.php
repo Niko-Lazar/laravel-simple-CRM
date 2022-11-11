@@ -28,7 +28,7 @@
                         <a href="/clients/{{ $client->slug }}/edit" class="btn btn-warning">Edit</a>
                     </td>
                     <td>
-                        <form method="POST" action="/clients/{{ $client->id }}">
+                        <form method="POST" action="/clients/{{ $client->slug }}">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" type="submit">Delete</button>
@@ -37,5 +37,8 @@
                 </tr>
             @endforeach
         </table>
+        <div>
+            <a href="/clients/create">add client</a>
+        </div>
     </div>
 </x-layout>
