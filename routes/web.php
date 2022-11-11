@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 // Clients
 Route::resource('clients', ClientController::class);
 
+// Projects
+Route::get('/projects', [ProjectController::class, 'index']);

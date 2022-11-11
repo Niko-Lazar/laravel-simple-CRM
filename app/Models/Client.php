@@ -15,12 +15,6 @@ class Client extends Model
     {
         return 'slug';
     }
-
-    public function projects()
-    {
-        return $this->hasMany(Project::class);
-    }
-
     // accessors
     public function getNameAttribute($name) : string
     {
@@ -30,5 +24,10 @@ class Client extends Model
     public function getSlugAttribute($slug) : string
     {
         return strtolower($slug);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
 }

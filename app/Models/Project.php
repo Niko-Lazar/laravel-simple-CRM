@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
-use App\Enums\ProjectStatus;
+use App\Enums\ProjectStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    protected $casts = [
+        'status' => ProjectStatusEnum::class
+    ];
 
     public function client()
     {

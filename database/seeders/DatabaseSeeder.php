@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Client;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
+use App\Enums\ProjectStatusEnum;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Client::truncate();
+        Project::truncate();
 
         Client::create([
             'name' => 'Lazar',
@@ -29,6 +32,24 @@ class DatabaseSeeder extends Seeder
             'slug' => 'peki',
             'logo' => 'logos/pera.jpeg',
             'website' => null,
+        ]);
+
+        Project::create([
+            'client_id' => 1,
+            'title' => 'project 1',
+            'slug' => 'project1',
+            'description' => 'a short project description',
+            'deadline' => date('Y-m-d', time()),
+            'status' => ProjectStatusEnum::InProgress,
+        ]);
+
+        Project::create([
+            'client_id' => 1,
+            'title' => 'project 2',
+            'slug' => 'project2',
+            'description' => 'a short project description',
+            'deadline' => date('Y-m-d', time()),
+            'status' => ProjectStatusEnum::InProgress,
         ]);
 
         // \App\Models\User::factory(10)->create();
