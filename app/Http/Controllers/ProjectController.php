@@ -63,9 +63,13 @@ class ProjectController extends Controller
 
         if(request('status') == 'finished'){
             $attributes['status'] = ProjectStatusEnum::Finished;
+        } else {
+            $attributes['status'] = ProjectStatusEnum::InProgress;
         }
 
-        return redirect('/projects');
+        $project->update($attributes);
+
+        return redirect('/projects/');
     }
 
     public function destroy(Project $project)
