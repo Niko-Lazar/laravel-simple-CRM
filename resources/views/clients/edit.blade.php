@@ -22,7 +22,11 @@
                         class="form-control"
                         name="logo"
                         access="false"
-                        multiple="false" id="logo" required="required" aria-required="true">
+                        multiple="false" id="logo"
+                        @if(!$client->logo)
+                            required="required"
+                        @endif
+                        aria-required="true">
                     <img
                         src="{{ asset('storage/' . $client->logo) }}"
                         alt="logo" width="65px" height="64px"
