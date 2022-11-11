@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container">
-        <form method="POST" action="{{ route('store_client') }}" enctype="multipart/form-data">
+        <form method="POST" action="clients/store" enctype="multipart/form-data">
             @csrf
             <div class="rendered-form">
                 <div class="formbuilder-text form-group field-name">

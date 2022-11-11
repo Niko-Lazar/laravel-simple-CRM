@@ -2,6 +2,7 @@
     <div class="container">
         <form method="POST" action="/clients/{{ $client->id }}/update">
             @csrf
+            @method('PATCH')
             <div class="rendered-form">
                 <div class="formbuilder-text form-group field-name">
                     <label for="name" class="formbuilder-text-label">name<span class="formbuilder-required">*</span><span class="tooltip-element" tooltip="client's name">?</span></label>

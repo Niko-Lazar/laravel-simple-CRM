@@ -25,11 +25,12 @@
                         @endif
                     </td>
                     <td>
-                        <a href="/client/edit/{{ $client->slug }}" class="btn btn-warning">Edit</a>
+                        <a href="/clients/{{ $client->slug }}/edit" class="btn btn-warning">Edit</a>
                     </td>
                     <td>
                         <form method="POST" action="/clients/{{ $client->id }}">
                             @csrf
+                            @method('DELETE')
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>

@@ -19,6 +19,6 @@
             </tr>
         </table>
 
-        <a href="{{ route('clients') }}" >back</a>
+        <a href="/clients" >back</a>
     </div>
 </x-layout>

@@ -11,18 +11,23 @@ class Client extends Model
 
     protected $guarded = [];
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function projects()
     {
         return $this->hasMany(Project::class);
     }
 
     // accessors
-    public function getNameAttribute($name)
+    public function getNameAttribute($name) : string
     {
         return ucwords($name);
     }
 
-    public function getSlugAttribute($slug)
+    public function getSlugAttribute($slug) : string
     {
         return strtolower($slug);
     }
