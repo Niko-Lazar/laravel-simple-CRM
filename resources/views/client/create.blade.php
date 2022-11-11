@@ -24,11 +24,13 @@
                 </div>
             </div>
 
-            <ul class="mt-3">
-                @foreach($errors->all() as $error)
-                    <li class="text-danger">{{ $error }}</li>
-                @endforeach
-            </ul>
+            @if($errors->any())
+                <ul class="mt-3">
+                    @foreach($errors->all() as $error)
+                        <li class="text-danger">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
         </form>
     </div>
 </x-layout>
