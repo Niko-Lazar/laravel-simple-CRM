@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id');
+            $table->foreignId('client_id')->constrained();
             $table->string('slug')->unique();
             $table->string('title');
             $table->string('description');
