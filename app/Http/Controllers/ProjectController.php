@@ -30,7 +30,7 @@ class ProjectController extends Controller
             'title' => 'required|min:3|max:255',
             'slug' => 'required|min:3|max:255|unique:projects,slug',
             'description' =>'required|min:3|max:255',
-            'deadline' => 'required|date',
+            'deadline' => 'required|date|after:tomorrow',
             'client_id' => ['required', Rule::exists('clients', 'id')]
         ]);
 
@@ -57,7 +57,7 @@ class ProjectController extends Controller
             'title' => 'required|min:3|max:255',
             'slug' => ['required', Rule::unique('projects', 'slug')->ignore($project)],
             'description' =>'required|min:3|max:255',
-            'deadline' => 'required|date',
+            'deadline' => 'required|date|after:today',
             'client_id' => ['required', Rule::exists('clients', 'id')]
         ]);
 

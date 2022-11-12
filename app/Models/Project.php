@@ -21,6 +21,18 @@ class Project extends Model
         return 'slug';
     }
 
+    // accessors
+    public function getTitleAttribute($title)
+    {
+        return ucwords($title);
+    }
+
+    public function getDescriptionAttribute($description)
+    {
+        return ucfirst($description);
+    }
+
+    // relations
     public function client()
     {
         return $this->belongsTo(Client::class);

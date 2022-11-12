@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'project 1',
             'slug' => 'project1',
             'description' => 'a short project description',
-            'deadline' => date('Y-m-d', time()),
+            'deadline' => date_format(now()->addDays(2), 'Y-m-d'),
             'status' => ProjectStatusEnum::InProgress,
         ]);
 
@@ -48,10 +48,18 @@ class DatabaseSeeder extends Seeder
             'title' => 'project 2',
             'slug' => 'project2',
             'description' => 'a short project description',
-            'deadline' => date('Y-m-d', time()),
+            'deadline' => date_format(now()->addDays(2), 'Y-m-d'),
             'status' => ProjectStatusEnum::InProgress,
         ]);
 
+        Project::create([
+            'client_id' => 1,
+            'title' => 'project 3',
+            'slug' => 'project3',
+            'description' => 'a short project description',
+            'deadline' => date_format(now()->addDays(7), 'Y-m-d'),
+            'status' => ProjectStatusEnum::InProgress,
+        ]);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
