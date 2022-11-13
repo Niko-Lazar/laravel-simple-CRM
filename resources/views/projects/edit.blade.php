@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container">
-        <form method="POST" action="/projects/{{ $project->slug }}">
+        <form method="POST" action="{{ route('projects.update', $project->slug) }}">
             @csrf
             @method('PATCH')
             <div class="rendered-form">

@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container">
-        <form method="POST" action="/employees">
+        <form method="POST" action="{{ route('employees.store') }}">
             @csrf
 
             <div class="rendered-form">

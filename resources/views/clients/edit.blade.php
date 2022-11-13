@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container">
-        <form method="POST" action="/clients/{{ $client->slug }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('clients.update', $client->slug) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="rendered-form">

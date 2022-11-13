@@ -19,6 +19,7 @@ class EmployeeController extends Controller
 
     public function create()
     {
+        // scope
         return view('employees.create', ['superiors' => Employee::where('role', 'superior')->get()]);
     }
 
@@ -34,7 +35,7 @@ class EmployeeController extends Controller
 
         Employee::create($attributes);
 
-        return redirect('/employees');
+        return redirect()->route('employees.index');
     }
 
     public function edit(Employee $employee)
@@ -49,6 +50,6 @@ class EmployeeController extends Controller
     {
         $employee->delete();
 
-        return redirect('/employees');
+        return redirect()->route('employees.index');
     }
 }

@@ -1,12 +1,12 @@
 <x-layout>
     <div class="container">
-        <form method="POST" action="/employees">
+        <form method="POST" action="{{ route('employees.update', $employee->id) }}">
             @csrf
-            @method('patch')
+            @method('PATCH')
 
             <div class="rendered-form">
                 <div class="">
-                    <h1 access="false" id="control-6169232">Add Employee</h1></div>
+                    <h1 access="false" id="control-6169232">Edit Employee</h1></div>
                 <div class="formbuilder-text form-group field-name">
                     <label for="name" class="formbuilder-text-label">Name<span class="formbuilder-required">*</span></label>
                     <input
@@ -60,14 +60,14 @@
                                 <option
                                     value="{{ $superior->id }}"
                                     id="role-1"
-                                    {{ ($employee->employee_id == $superior->id) ? 'selected' : null }}
+                                    {{ ($employee->employee_id === $superior->id) ? 'selected' : null }}
                                 >{{ $superior->name }}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="formbuilder-button form-group field-submit mt-4">
-                        <button type="submit" class="btn-info btn" name="submit" access="false" style="info" id="submit">Add Employee</button>
+                        <button type="submit" class="btn-info btn" name="submit" access="false" style="info" id="submit">Update Employee</button>
                     </div>
                 </div>
 

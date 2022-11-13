@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         Client::create([
             'name' => 'Lazar',
             'slug' => 'laki',

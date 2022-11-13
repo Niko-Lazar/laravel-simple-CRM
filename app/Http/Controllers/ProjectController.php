@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Project;
 use App\Enums\ProjectStatusEnum;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class ProjectController extends Controller
 {
@@ -40,7 +41,7 @@ class ProjectController extends Controller
 
         Project::create($attributes);
 
-        return redirect('/projects/');
+        return redirect()->route('employees.index');
     }
 
     public function edit(Project $project)
@@ -58,24 +59,19 @@ class ProjectController extends Controller
             'slug' => ['required', Rule::unique('projects', 'slug')->ignore($project)],
             'description' =>'required|min:3|max:255',
             'deadline' => 'required|date|after:today',
-            'client_id' => ['required', Rule::exists('clients', 'id')]
+            'client_id' => ['required', Rule::exists('clients', 'id')],
+            'status' => ['nullable', new Enum(ProjectStatusEnum::class)],
         ]);
-
-        if(request('status') == 'finished'){
-            $attributes['status'] = ProjectStatusEnum::Finished;
-        } else {
-            $attributes['status'] = ProjectStatusEnum::InProgress;
-        }
 
         $project->update($attributes);
 
-        return redirect('/projects/');
+        return redirect()->route('employees.index');
     }
 
     public function destroy(Project $project)
     {
         $project->delete();
 
-        return redirect('/projects');
+        return redirect()->route('employees.index');
     }
 }

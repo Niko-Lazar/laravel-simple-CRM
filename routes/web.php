@@ -18,17 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 // Clients
 Route::resource('clients', ClientController::class);
-
 // Projects
 Route::resource('projects', ProjectController::class);
-
 // Employees
 Route::resource('employees', EmployeeController::class);
-//Route::get('/employees', [EmployeeController::class, 'index']);
-//Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy']);
-//Route::get('/employees/create', [EmployeeController::class, 'create']);
-//Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit']);
-//Route::get('/employees/{employee}', [EmployeeController::class, 'show']);
-//
-//Route::put('/employees', [EmployeeController::class, 'store']);
-

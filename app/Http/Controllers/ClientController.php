@@ -36,7 +36,7 @@ class ClientController extends Controller
 
         Client::create($attributes);
 
-        return redirect('/clients');
+        return redirect()->route('clients.index');
     }
 
     public function edit(Client $client)
@@ -59,13 +59,13 @@ class ClientController extends Controller
 
         $client->update($attributes);
 
-        return redirect('/clients');
+        return redirect()->route('clients.index');
     }
 
     public function destroy(Client $client)
     {
         $client->delete();
 
-        return redirect('/clients');
+        return redirect()->route('clients.index');
     }
 }
