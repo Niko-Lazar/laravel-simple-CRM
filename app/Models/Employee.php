@@ -16,7 +16,7 @@ class Employee extends Model
         return $this->belongsToMany(Project::class);
     }
 
-    public function isSuperiorTo()
+    public function superiorTo()
     {
         return $this->hasMany(Employee::class);
     }
