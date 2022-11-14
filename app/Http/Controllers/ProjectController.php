@@ -32,6 +32,7 @@ class ProjectController extends Controller
             'slug' => 'required|min:3|max:255|unique:projects,slug',
             'description' =>'required|min:3|max:255',
             'deadline' => 'required|date|after:tomorrow',
+            'status' => ['nullable', new Enum(ProjectStatusEnum::class)],
             'client_id' => ['required', Rule::exists('clients', 'id')]
         ]);
 

@@ -43,7 +43,7 @@
                                 name="role"
                                 access="false"
                                 id="superior-0"
-                                value="employee"
+                                value="superior"
                                 type="checkbox"
                                 {{ old('role') ? 'checked' : null }}
                             >

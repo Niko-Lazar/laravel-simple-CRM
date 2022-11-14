@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\EmployeeRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,10 @@ class Employee extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'status' => EmployeeRole::class
+    ];
 
     public function projects()
     {
