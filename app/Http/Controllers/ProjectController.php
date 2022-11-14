@@ -42,7 +42,7 @@ class ProjectController extends Controller
 
         Project::create($attributes);
 
-        return redirect()->route('employees.index');
+        return redirect()->route('projects.index');
     }
 
     public function edit(Project $project)
@@ -66,13 +66,13 @@ class ProjectController extends Controller
 
         $project->update($attributes);
 
-        return redirect()->route('employees.index');
+        return redirect()->route('projects.index');
     }
 
     public function destroy(Project $project)
     {
         $project->delete();
 
-        return redirect()->route('employees.index');
+        return redirect()->route('projects.index');
     }
 }
