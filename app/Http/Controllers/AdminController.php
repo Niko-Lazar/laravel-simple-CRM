@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\EmployeeRole;
+use App\Enums\EmployeeRoleEnum;
 use App\Enums\ProjectStatusEnum;
 use App\Models\Client;
 use App\Models\Employee;
@@ -27,10 +27,10 @@ class AdminController extends Controller
             'totalEmployees' => Employee::all()
                 ->count(),
             'numOfSuperiors' => Employee::all()
-                ->where('role', '=', EmployeeRole::Superior)
+                ->where('role', '=', EmployeeRoleEnum::Superior->value)
                 ->count(),
             'numOfEmployees' =>Employee::all()
-                ->where('role', '=', EmployeeRole::Employee)
+                ->where('role', '=', EmployeeRoleEnum::Employee->value)
                 ->count(),
         ];
 

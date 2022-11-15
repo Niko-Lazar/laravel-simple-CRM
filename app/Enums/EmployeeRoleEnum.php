@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum EmployeeRole:string
+enum EmployeeRoleEnum:string
 {
     case Employee = 'employee';
     case Superior = 'superior';

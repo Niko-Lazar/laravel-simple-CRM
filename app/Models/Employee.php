@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\EmployeeRole;
+use App\Enums\EmployeeRoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +13,7 @@ class Employee extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'status' => EmployeeRole::class
+        'status' => EmployeeRoleEnum::class
     ];
 
     public function scopeSuperiors($query)
