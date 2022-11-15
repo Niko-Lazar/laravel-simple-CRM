@@ -22,12 +22,12 @@ class Project extends Model
     }
 
     // accessors
-    public function getTitleAttribute($title)
+    public function getTitleAttribute($title) : string
     {
         return ucwords($title);
     }
 
-    public function getDescriptionAttribute($description)
+    public function getDescriptionAttribute($description) : string
     {
         return ucfirst($description);
     }
