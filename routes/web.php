@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
@@ -22,3 +23,5 @@ Route::resource('clients', ClientController::class);
 Route::resource('projects', ProjectController::class);
 // Employees
 Route::resource('employees', EmployeeController::class);
+
+Route::get('/admins', [AdminController::class, 'projects']);
