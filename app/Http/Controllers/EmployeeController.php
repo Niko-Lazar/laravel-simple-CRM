@@ -10,8 +10,9 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        // ? question mark
-        return view('employees.index', ['employees' => Employee::with('superior')->get()]);
+        return view('employees.index', [
+            'employees' => Employee::with('superior', 'projects')->get()]
+        );
     }
 
     public function show(Employee $employee)
@@ -21,8 +22,7 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        // scope
-        return view('employees.create', ['superiors' => Employee::where('role', 'superior')->get()]);
+        return view('employees.create', ['superiors' => Employee::superiors()->get()]);
     }
 
     public function store()

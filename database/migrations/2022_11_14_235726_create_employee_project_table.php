@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id');
             $table->foreignId('project_id');
-
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@
                     <td>{{ $employee->superior->name ?? 'no superiors' }}</td>
                     <td>
                         @if(!($employee->projects->count()))
-                            no employees
+                            no projects
                         @else
                             @foreach($employee->projects as $employeeProject)
                                 {{ $employeeProject->title }}

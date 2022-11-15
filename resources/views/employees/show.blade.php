@@ -13,7 +13,7 @@
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
                 <td>{{ $employee->role }}</td>
-                <td>{{ $employee->superior->name ?? 'is superior' }}</td>
+                <td>{{ $employee->superior->name ?? 'no superiors' }}</td>
             </tr>
         </table>
 

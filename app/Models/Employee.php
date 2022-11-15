@@ -16,6 +16,11 @@ class Employee extends Model
         'status' => EmployeeRole::class
     ];
 
+    public function scopeSuperiors($query)
+    {
+        return $query->where('role', 'superior');
+    }
+
     public function projects()
     {
         return $this->belongsToMany(Project::class);
