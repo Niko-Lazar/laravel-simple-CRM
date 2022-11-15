@@ -7,6 +7,7 @@
                 <th>phone</th>
                 <th>role</th>
                 <th>Superior</th>
+                <th>Projects</th>
                 <th colspan="2">Action</th>
             </tr>
             @foreach($employees as $employee)
@@ -18,6 +19,14 @@
                     <td>{{ $employee->phone }}</td>
                     <td>{{ $employee->role }}</td>
                     <td>{{ $employee->superior->name ?? 'no superiors' }}</td>
+                    <td>
+                        @if(!($employee->projects->count()))
+                            no employees
+                        @else
+                            @foreach($employee->projects as $employeeProject)
+                                {{ $employeeProject->title }}
+                            @endforeach
+                        @endif
                     <td>
                         <a class="btn btn-warning" href="/employees/{{ $employee->id }}/edit">Edit</a>
                     </td>

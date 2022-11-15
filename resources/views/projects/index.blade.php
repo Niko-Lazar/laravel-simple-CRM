@@ -8,6 +8,7 @@
                 <th>deadline</th>
                 <th>status</th>
                 <th>Client</th>
+                <th>Employees</th>
                 <th colspan="2">Action</th>
             </tr>
             @foreach($projects as $project)
@@ -24,6 +25,15 @@
                     <td>{{ $project->deadline }}</td>
                     <td>{{ $project->status }}</td>
                     <td>{{ $project->client->name }}</td>
+                    <td>
+                        @if(!($project->employees->count()))
+                            no employees
+                        @else
+                            @foreach($project->employees as $projectEmployee)
+                                {{ $projectEmployee->name }}
+                            @endforeach
+                        @endif
+                    </td>
                     <td>
                         <a class="btn btn-warning" href="projects/{{ $project->slug }}/edit">Edit</a>
                     </td>
