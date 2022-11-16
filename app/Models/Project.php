@@ -38,6 +38,34 @@ class Project extends Model
     }
 
     // scopes
+    public function scopeFilter($query)
+    {
+        $projectTitle = '';
+        $clientName = '';
+        $status = '%%';
+        $dateFrom = '0000-00-00';
+        $dateTo = '9999-12-31';
+
+        if(request()->method() == 'POST'){
+            $projectTitle = request('projectName');
+            $clientName = request('clientName');
+            $dateFrom = request('dateFrom');
+            $dateTo = request('dateTo');
+
+            if(request('status') === 'finished'){
+                $status = ProjectStatusEnum::Finished;
+            } else if(request('status') === 'inProgress') {
+                $status = ProjectStatusEnum::InProgress;
+            }
+        }
+
+        $query->whereHas('client', function($query) use ($clientName) {
+            $query->where('name', 'like', '%'.$clientName.'%');
+        })
+            ->where('title', 'like', '%'.$projectTitle.'%')
+            ->where('status', 'like', $status)
+            ->whereBetween('deadline', [$dateFrom, $dateTo]);
+    }
 
     // relations
     public function client()
