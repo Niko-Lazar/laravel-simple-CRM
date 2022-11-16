@@ -11,7 +11,7 @@ class EmployeeController extends Controller
     public function index()
     {
         return view('employees.index', [
-            'employees' => Employee::with('superior', 'projects')->get()]
+            'employees' => Employee::with(['superior', 'projects'])->get()]
         );
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,14 +17,18 @@ class Client extends Model
         return 'slug';
     }
     // accessors
-    public function getNameAttribute($name) : string
+    protected function name() : Attribute
     {
-        return ucwords($name);
+        return Attribute::make(
+            get: fn($name) => ucwords($name),
+        );
     }
 
-    public function getSlugAttribute($slug) : string
+    protected function Slug() : Attribute
     {
-        return strtolower($slug);
+        return Attribute::make(
+            get: fn($slug) => strtolower($slug),
+        );
     }
 
     public function projects()

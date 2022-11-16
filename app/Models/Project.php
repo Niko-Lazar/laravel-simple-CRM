@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ProjectStatusEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,14 +23,18 @@ class Project extends Model
     }
 
     // accessors
-    public function getTitleAttribute($title) : string
+    protected function title() : Attribute
     {
-        return ucwords($title);
+        return Attribute::make(
+            get: fn($title) => ucwords($title),
+        );
     }
 
-    public function getDescriptionAttribute($description) : string
+    protected function description() : Attribute
     {
-        return ucfirst($description);
+        return Attribute::make(
+            get: fn($desc) => ucfirst($desc),
+        );
     }
 
     // relations
