@@ -17,6 +17,7 @@
     </style>
 </head>
 <body>
+<x-nav></x-nav>
 
 {{ $slot }}
 
