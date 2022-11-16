@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function projects()
+    public function stats()
     {
         $allProjects = Project::all();
         $allEmployees = Employee::all();
@@ -56,5 +56,33 @@ class AdminController extends Controller
             'employees' => $employees,
             'clients' => $clients,
         ]);
+    }
+
+    public function projects()
+    {
+
+        $projectTitle = '';
+        $clientName = '';
+        $status = '%%';
+
+        if(request()->method() == 'POST'){
+            $projectTitle = request('projectName');
+            $clientName = request('clientName');
+
+            if(request('status') === 'finished'){
+                $status = ProjectStatusEnum::Finished;
+            } else if(request('status') === 'inProgress') {
+                $status = ProjectStatusEnum::InProgress;
+            }
+        }
+
+        $projects = Project::whereHas('client', function($query) use ($clientName) {
+                $query->where('name', 'like', '%'.$clientName.'%');
+        })
+            ->where('title', 'like', '%'.$projectTitle.'%')
+            ->where('status', 'like', $status)
+            ->get();
+
+        return view('admins.projects', ['projects' => $projects]);
     }
 }

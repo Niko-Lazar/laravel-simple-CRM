@@ -37,6 +37,8 @@ class Project extends Model
         );
     }
 
+    // scopes
+
     // relations
     public function client()
     {

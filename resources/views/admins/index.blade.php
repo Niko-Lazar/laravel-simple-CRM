@@ -15,7 +15,6 @@
                         <td>{{ $projects['numOfFinished'] }}</td>
                         <td>{{ $projects['numOfInProgress'] }}</td>
                     </tr>
-
                 </table>
             </div>
 
@@ -34,7 +33,6 @@
                         <td>{{ $employees['numOfEmployees'] }}</td>
                         <td>{{ $employees['employeesWithoutProjects'] }}</td>
                     </tr>
-
                 </table>
             </div>
 
@@ -49,7 +47,6 @@
                         <td>{{ $clients['totalClients'] }}</td>
                         <td>{{ $clients['numOfWebsites'] }}</td>
                     </tr>
-
                 </table>
             </div>
         </div>

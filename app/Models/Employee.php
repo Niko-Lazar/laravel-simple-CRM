@@ -30,6 +30,7 @@ class Employee extends Model
         return $query->where('role', 'superior');
     }
 
+    // relations
     public function projects()
     {
         return $this->belongsToMany(Project::class);
@@ -42,6 +43,6 @@ class Employee extends Model
 
     public function superior()
     {
-        return $this->belongsTo(Employee::class, 'employee_id');
+        return $this->belongsTo(Employee::class, 'employee_id')->withDefault(['name' => 'no superiors']);
     }
 }

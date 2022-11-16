@@ -18,7 +18,7 @@
                     <td>{{ $employee->email }}</td>
                     <td>{{ $employee->phone }}</td>
                     <td>{{ $employee->role }}</td>
-                    <td>{{ $employee->superior->name ?? 'no superiors' }}</td>
+                    <td>{{ $employee->superior->name }}</td>
                     <td>
                         @if(!($employee->projects->count()))
                             no projects
