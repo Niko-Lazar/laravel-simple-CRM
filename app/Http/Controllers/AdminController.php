@@ -64,10 +64,14 @@ class AdminController extends Controller
         $projectTitle = '';
         $clientName = '';
         $status = '%%';
+        $dateFrom = '0000-00-00';
+        $dateTo = '9999-12-31';
 
         if(request()->method() == 'POST'){
             $projectTitle = request('projectName');
             $clientName = request('clientName');
+            $dateFrom = request('dateFrom');
+            $dateTo = request('dateTo');
 
             if(request('status') === 'finished'){
                 $status = ProjectStatusEnum::Finished;
@@ -81,6 +85,7 @@ class AdminController extends Controller
         })
             ->where('title', 'like', '%'.$projectTitle.'%')
             ->where('status', 'like', $status)
+            ->whereBetween('deadline', [$dateFrom, $dateTo])
             ->get();
 
         return view('admins.projects', ['projects' => $projects]);
