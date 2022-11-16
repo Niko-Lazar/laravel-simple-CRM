@@ -6,6 +6,7 @@ use App\Enums\EmployeeRoleEnum;
 use App\Enums\ProjectStatusEnum;
 use App\Models\Client;
 use App\Models\Employee;
+use App\Models\EmployeeProject;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -13,29 +14,41 @@ class AdminController extends Controller
 {
     public function projects()
     {
+        $allProjects = Project::all();
+        $allEmployees = Employee::all();
+        $allClients = Client::all();
+
         $projects = [
-            'totalProjects' =>Project::all()->count(),
-            'numOfFinished' => Project::all()
+            'totalProjects' =>$allProjects->count(),
+            'numOfFinished' => $allProjects
                 ->where('status', '=', ProjectStatusEnum::Finished)
                 ->count(),
-            'numOfInProgress' => Project::all()
+            'numOfInProgress' => $allProjects
                 ->where('status', '=', ProjectStatusEnum::InProgress)
                 ->count(),
         ];
 
         $employees = [
-            'totalEmployees' => Employee::all()
+            'totalEmployees' => $allEmployees
                 ->count(),
-            'numOfSuperiors' => Employee::all()
+            'numOfSuperiors' => $allEmployees
                 ->where('role', '=', EmployeeRoleEnum::Superior->value)
                 ->count(),
-            'numOfEmployees' =>Employee::all()
+            'numOfEmployees' =>$allEmployees
                 ->where('role', '=', EmployeeRoleEnum::Employee->value)
                 ->count(),
+            'employeesWithoutProjects' => $allEmployees
+                ->whereNotIn('id',
+                    EmployeeProject::all()->pluck('employee_id')
+                )
+                ->count()
         ];
 
         $clients = [
-            'totalClients' => Client::all()->count(),
+            'totalClients' => $allClients->count(),
+            'numOfWebsites' => $allClients
+                ->whereNotNull('website')
+                ->count(),
         ];
 
         return view('admins.index', [
