@@ -6,6 +6,7 @@ use App\Enums\ROLE;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Employee extends Model
 {
@@ -31,20 +32,18 @@ class Employee extends Model
     }
 
     // scopes
-    public function scopeStats()
+    public function scopeStats($query)
     {
-        $allEmployees = self::all();
-
         return [
-            'totalEmployees' => $allEmployees
+            'totalEmployees' =>DB::table('employees')
                 ->count(),
-            'numOfSuperiors' => $allEmployees
-                ->where('role', '=', ROLE::SUPERIOR->value)
+            'numOfSuperiors' => DB::table('employees')
+                ->where('role', '=', ROLE::SUPERIOR)
                 ->count(),
-            'numOfEmployees' =>$allEmployees
-                ->where('role', '=', ROLE::EMPLOYEE->value)
+            'numOfEmployees' => DB::table('employees')
+                ->where('role', '=', ROLE::EMPLOYEE)
                 ->count(),
-            'employeesWithoutProjects' => $allEmployees
+            'employeesWithoutProjects' => DB::table('employees')
                 ->whereNotIn('id',
                     EmployeeProject::all()->pluck('employee_id')
                 )

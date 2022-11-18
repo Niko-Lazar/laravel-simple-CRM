@@ -22,7 +22,7 @@
                         </th>
                         <th>
                             <Select name="status">
-                                <option
+                                <option value=""
                                     @if(request('status') === '')
                                         selected
                                     @endif
@@ -32,7 +32,7 @@
                                             selected
                                     @endif
                                 >Finished</option>
-                                <option value="inProgress"
+                                <option value="in progress"
                                         @if(request('status') === 'inProgress')
                                             selected
                                         @endif

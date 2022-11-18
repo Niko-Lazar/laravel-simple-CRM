@@ -7,6 +7,7 @@ use App\Enums\ProjectStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Project extends Model
 {
@@ -41,50 +42,28 @@ class Project extends Model
     // scopes
     public function scopeFilter($query)
     {
-        $projectTitle = '';
-        $clientName = '';
-        $status = '%%';
-        $dateFrom = '0000-00-00';
-        $dateTo = '9999-12-31';
+        $projectTitle = request('projectName', '');
+        $clientName = request('clientName', '');
+        $dateFrom = request('dateFrom', '');
+        $dateTo = request('dateTo', '');
+        $status = request('status');
 
-        if(request()->method() == 'POST'){
-            $projectTitle = request('projectName');
-            $clientName = request('clientName');
-            $dateFrom = request('dateFrom');
-            $dateTo = request('dateTo');
-
-            if(request('status') === 'finished'){
-                $status = ProjectStatus::FINISHED;
-            } else if(request('status') === 'inProgress') {
-                $status = ProjectStatus::INPROGRESS;
-            }
-
-            if(!request('dateFrom')) {
-                $dateFrom = '0000-00-00';
-            }
-            if(!request('dateTo')) {
-                $dateTo = '9999-12-31';
-            }
-        }
-
-        $query->whereHas('client', function($query) use ($clientName) {
-            $query->where('name', 'like', '%'.$clientName.'%');
+        $query->whereHas('client', function ($query) use ($clientName) {
+            $query->where('name', 'like', '%' . $clientName . '%');
         })
-            ->where('title', 'like', '%'.$projectTitle.'%')
-            ->where('status', 'like', $status)
-            ->whereBetween('deadline', [$dateFrom, $dateTo]);
+            ->where('title', 'like', '%' . $projectTitle . '%')
+            ->when($status, fn($query) => $query->where('status', request()->enum('status', ProjectStatus::class)))
+            ->when($dateFrom && $dateTo, fn($query) => $query->whereBetween('deadline', [$dateFrom, $dateTo]));
     }
 
     public function scopeStats($query) : array
     {
-        $allProjects = self::all();
-
         return [
-            'totalProjects' =>$allProjects->count(),
-            'numOfFinished' => $allProjects
+            'totalProjects' =>DB::table('projects')->count(),
+            'numOfFinished' => DB::table('projects')
                 ->where('status', '=', ProjectStatus::FINISHED)
                 ->count(),
-            'numOfInProgress' => $allProjects
+            'numOfInProgress' => DB::table('projects')
                 ->where('status', '=', ProjectStatus::INPROGRESS)
                 ->count(),
         ];

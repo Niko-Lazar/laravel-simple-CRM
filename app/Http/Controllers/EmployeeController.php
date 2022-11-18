@@ -40,7 +40,7 @@ class EmployeeController extends Controller
     {
         return view('employees.edit', [
             'employee' => $employee,
-            'superiors' => Employee::where('role', 'superior')->get()
+            'superiors' => Employee::where('role', ROLE::SUPERIOR)->get()
         ]);
     }
 
