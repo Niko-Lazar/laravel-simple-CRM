@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ROLE;
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Validation\Rules\Enum;
 
@@ -25,15 +27,9 @@ class EmployeeController extends Controller
         return view('employees.create', ['superiors' => Employee::superiors()->get()]);
     }
 
-    public function store()
+    public function store(StoreEmployeeRequest $request)
     {
-        $attributes = request()->validate([
-            'name' => 'required|min:3|max:255',
-            'email' => 'required|email|min:3|max:255',
-            'phone' => 'required|numeric',
-            'role' => ['nullable', new Enum(ROLE::class)],
-            'employee_id' => 'nullable'
-        ]);
+        $attributes = $request->validated();
 
         Employee::create($attributes);
 
@@ -48,15 +44,9 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function update(Employee $employee)
+    public function update(Employee $employee, UpdateEmployeeRequest $update)
     {
-        $attributes = request()->validate([
-            'name' => 'required|min:3|max:255',
-            'email' => 'required|email|min:3|max:255',
-            'phone' => 'required|numeric',
-            'role' => ['nullable', new Enum(ROLE::class)],
-            'employee_id' => 'nullable'
-        ]);
+        $attributes = $update->validated();
 
         $employee->update($attributes);
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Client;
 use App\Models\Project;
 use App\Enums\ProjectStatus;
@@ -25,16 +27,9 @@ class ProjectController extends Controller
         return view('projects.create', ['clients' => Client::all()]);
     }
 
-    public function store()
+    public function store(StoreProjectRequest $request)
     {
-        $attributes = request()->validate([
-            'title' => 'required|min:3|max:255',
-            'slug' => 'required|min:3|max:255|unique:projects,slug',
-            'description' =>'required|min:3|max:255',
-            'deadline' => 'required|date|after:tomorrow',
-            'status' => ['nullable', new Enum(ProjectStatus::class)],
-            'client_id' => ['required', Rule::exists('clients', 'id')]
-        ]);
+        $attributes = $request->validated();
 
         if(request('status')){
             $attributes['status'] = ProjectStatus::FINISHED;
@@ -53,16 +48,9 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function update(Project $project)
+    public function update(Project $project, UpdateProjectRequest $update)
     {
-        $attributes = request()->validate([
-            'title' => 'required|min:3|max:255',
-            'slug' => ['required', Rule::unique('projects', 'slug')->ignore($project)],
-            'description' =>'required|min:3|max:255',
-            'deadline' => 'required|date|after:today',
-            'client_id' => ['required', Rule::exists('clients', 'id')],
-            'status' => ['nullable', new Enum(ProjectStatus::class)],
-        ]);
+        $attributes = $update->validated();
 
         $project->update($attributes);
 
