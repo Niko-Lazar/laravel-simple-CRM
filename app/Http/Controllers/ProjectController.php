@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Project;
-use App\Enums\ProjectStatusEnum;
+use App\Enums\ProjectStatus;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
@@ -32,12 +32,12 @@ class ProjectController extends Controller
             'slug' => 'required|min:3|max:255|unique:projects,slug',
             'description' =>'required|min:3|max:255',
             'deadline' => 'required|date|after:tomorrow',
-            'status' => ['nullable', new Enum(ProjectStatusEnum::class)],
+            'status' => ['nullable', new Enum(ProjectStatus::class)],
             'client_id' => ['required', Rule::exists('clients', 'id')]
         ]);
 
         if(request('status')){
-            $attributes['status'] = ProjectStatusEnum::Finished;
+            $attributes['status'] = ProjectStatus::FINISHED;
         }
 
         Project::create($attributes);
@@ -61,7 +61,7 @@ class ProjectController extends Controller
             'description' =>'required|min:3|max:255',
             'deadline' => 'required|date|after:today',
             'client_id' => ['required', Rule::exists('clients', 'id')],
-            'status' => ['nullable', new Enum(ProjectStatusEnum::class)],
+            'status' => ['nullable', new Enum(ProjectStatus::class)],
         ]);
 
         $project->update($attributes);

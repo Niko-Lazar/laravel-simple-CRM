@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Enums\ProjectStatusEnum;
+use App\Enums\ROLE;
+use App\Enums\ProjectStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,7 @@ class Project extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'status' => ProjectStatusEnum::class
+        'status' => ProjectStatus::class
     ];
 
     public function getRouteKeyName(): string
@@ -53,9 +54,16 @@ class Project extends Model
             $dateTo = request('dateTo');
 
             if(request('status') === 'finished'){
-                $status = ProjectStatusEnum::Finished;
+                $status = ProjectStatus::FINISHED;
             } else if(request('status') === 'inProgress') {
-                $status = ProjectStatusEnum::InProgress;
+                $status = ProjectStatus::INPROGRESS;
+            }
+
+            if(!request('dateFrom')) {
+                $dateFrom = '0000-00-00';
+            }
+            if(!request('dateTo')) {
+                $dateTo = '9999-12-31';
             }
         }
 
@@ -65,6 +73,21 @@ class Project extends Model
             ->where('title', 'like', '%'.$projectTitle.'%')
             ->where('status', 'like', $status)
             ->whereBetween('deadline', [$dateFrom, $dateTo]);
+    }
+
+    public function scopeStats($query) : array
+    {
+        $allProjects = self::all();
+
+        return [
+            'totalProjects' =>$allProjects->count(),
+            'numOfFinished' => $allProjects
+                ->where('status', '=', ProjectStatus::FINISHED)
+                ->count(),
+            'numOfInProgress' => $allProjects
+                ->where('status', '=', ProjectStatus::INPROGRESS)
+                ->count(),
+        ];
     }
 
     // relations

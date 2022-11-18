@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\EmployeeRoleEnum;
+use App\Enums\ROLE;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +14,7 @@ class Employee extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'status' => EmployeeRoleEnum::class
+        'status' => ROLE::class
     ];
 
     // accesors
@@ -29,6 +29,29 @@ class Employee extends Model
     {
         return $query->where('role', 'superior');
     }
+
+    // scopes
+    public function scopeStats()
+    {
+        $allEmployees = self::all();
+
+        return [
+            'totalEmployees' => $allEmployees
+                ->count(),
+            'numOfSuperiors' => $allEmployees
+                ->where('role', '=', ROLE::SUPERIOR->value)
+                ->count(),
+            'numOfEmployees' =>$allEmployees
+                ->where('role', '=', ROLE::EMPLOYEE->value)
+                ->count(),
+            'employeesWithoutProjects' => $allEmployees
+                ->whereNotIn('id',
+                    EmployeeProject::all()->pluck('employee_id')
+                )
+                ->count()
+        ];
+    }
+
 
     // relations
     public function projects()

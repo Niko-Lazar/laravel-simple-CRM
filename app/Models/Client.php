@@ -24,6 +24,20 @@ class Client extends Model
         );
     }
 
+    // scopes
+    public function scopeStats($query) : array
+    {
+        $allClients = self::all();
+
+        return [
+            'totalClients' => $allClients->count(),
+            'numOfWebsites' => $allClients
+                ->whereNotNull('website')
+                ->count(),
+        ];
+    }
+
+
     protected function Slug() : Attribute
     {
         return Attribute::make(

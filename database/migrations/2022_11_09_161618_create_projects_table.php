@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\ProjectStatusEnum;
+use App\Enums\ProjectStatus;
 
 return new class extends Migration
 {
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->date('deadline');
-            $table->string('status')->default(ProjectStatusEnum::InProgress->value);
+            $table->string('status')->default(ProjectStatus::INPROGRESS->value);
             $table->timestamps();
         });
     }

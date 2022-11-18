@@ -62,6 +62,9 @@
                                 value="{{ request('dateTo') }}"
                             />
                         </th>
+                        <th colspan="2">
+                            <button type="reset" value="reset">Reset</button>
+                        </th>
                     </tr>
                 </form>
             </tr>

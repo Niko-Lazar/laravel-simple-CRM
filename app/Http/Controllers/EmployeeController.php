@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\EmployeeRoleEnum;
+use App\Enums\ROLE;
 use App\Models\Employee;
 use Illuminate\Validation\Rules\Enum;
 
@@ -31,7 +31,7 @@ class EmployeeController extends Controller
             'name' => 'required|min:3|max:255',
             'email' => 'required|email|min:3|max:255',
             'phone' => 'required|numeric',
-            'role' => ['nullable', new Enum(EmployeeRoleEnum::class)],
+            'role' => ['nullable', new Enum(ROLE::class)],
             'employee_id' => 'nullable'
         ]);
 
@@ -54,7 +54,7 @@ class EmployeeController extends Controller
             'name' => 'required|min:3|max:255',
             'email' => 'required|email|min:3|max:255',
             'phone' => 'required|numeric',
-            'role' => ['nullable', new Enum(EmployeeRoleEnum::class)],
+            'role' => ['nullable', new Enum(ROLE::class)],
             'employee_id' => 'nullable'
         ]);
 

@@ -7,7 +7,7 @@ use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Project;
 use Illuminate\Database\Seeder;
-use App\Enums\ProjectStatusEnum;
+use App\Enums\ProjectStatus;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'slug' => 'project1',
             'description' => 'a short project description',
             'deadline' => date_format(now()->addDays(2), 'Y-m-d'),
-            'status' => ProjectStatusEnum::InProgress,
+            'status' => ProjectStatus::INPROGRESS,
         ]);
 
         Project::create([
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             'slug' => 'project2',
             'description' => 'a short project description',
             'deadline' => date_format(now()->addDays(2), 'Y-m-d'),
-            'status' => ProjectStatusEnum::InProgress,
+            'status' => ProjectStatus::INPROGRESS,
         ]);
 
         Project::create([
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'slug' => 'project3',
             'description' => 'a short project description',
             'deadline' => date_format(now()->addDays(7), 'Y-m-d'),
-            'status' => ProjectStatusEnum::InProgress,
+            'status' => ProjectStatus::INPROGRESS,
         ]);
 
         Employee::create([
