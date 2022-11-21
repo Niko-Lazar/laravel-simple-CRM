@@ -64,7 +64,7 @@
                             />
                         </th>
                         <th colspan="2">
-                            <button type="reset" value="reset">Reset</button>
+                            <button type="reset" name="reset" value="reset">Reset</button>
                         </th>
                     </tr>
                 </form>

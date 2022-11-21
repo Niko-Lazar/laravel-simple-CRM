@@ -9,6 +9,7 @@
                             type="text"
                             name="clientName"
                             placeholder="Client Name"
+                            value="{{ request('clientName') }}"
                             >
                     </th>
                     <th>
@@ -16,16 +17,17 @@
                             type="text"
                             name="website"
                             placeholder="website"
+                            value="{{ request('website') }}"
                         >
                     </th>
                     <th>
                         <select name="logoExtension">
-                            <option value="">All</option>
-                            <option value="jpg">jpg</option>
-                            <option value="jpeg">jpeg</option>
-                            <option value="png">png</option>
-                            <option value="gif">gif</option>
-                            <option value="svg">svg</option>
+                            <option value="" {{ request('logoExtension') == '' ? 'selected' : null }}>All</option>
+                            <option value="jpg"{{ request('logoExtension') == 'jpg' ? 'selected' : null }}>jpg</option>
+                            <option value="jpeg"{{ request('logoExtension') == 'jpeg' ? 'selected' : null }}>jpeg</option>
+                            <option value="png"{{ request('logoExtension') == 'png' ? 'selected' : null }}>png</option>
+                            <option value="gif"{{ request('logoExtension') == 'gif' ? 'selected' : null }}>gif</option>
+                            <option value="svg"{{ request('logoExtension') == 'svg' ? 'selected' : null }}>svg</option>
                         </select>
                     </th>
                     <th>

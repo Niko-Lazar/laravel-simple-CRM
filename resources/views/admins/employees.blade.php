@@ -9,6 +9,7 @@
                             type="text"
                             name="name"
                             placeholder="Employee name"
+                            value="{{ request('name') }}"
                         >
                     </th>
                     <th>
@@ -16,6 +17,7 @@
                             type="text"
                             name="email"
                             placeholder="Employee email"
+                            value="{{ request('email') }}"
                         >
                     </th>
                     <th>
@@ -23,13 +25,14 @@
                             type="text"
                             name="phone"
                             placeholder="phone"
+                            value="{{ request('phone') }}"
                         >
                     </th>
                     <th>
                         <select name="role">
-                            <option value="">All</option>
-                            <option value="employee">Employee</option>
-                            <option value="superior">Superior</option>
+                            <option value="" {{ request('role') == '' ? 'selected' : null }}>All</option>
+                            <option value="employee" {{ request('role') == 'employee' ? 'selected' : null }}>Employee</option>
+                            <option value="superior" {{ request('role') == 'superior' ? 'selected' : null }}>Superior</option>
                         </select>
                     </th>
                     <th>
