@@ -22,15 +22,25 @@ class DatabaseSeeder extends Seeder
             'name' => 'Lazar',
             'slug' => 'laki',
             'logo' => 'logos/lazar.jpeg',
-            'website' => null,
+            'website' => 'www.lazar.com',
         ]);
 
         Client::create([
             'name' => 'Pera',
             'slug' => 'peki',
             'logo' => 'logos/pera.jpeg',
-            'website' => null,
+            'website' => 'www.pera.rs',
         ]);
+
+        Client::factory(50)->create();
+
+        Employee::create([
+            'name' => 'Fica',
+            'email' => 'fica@example.com',
+            'phone' => '123456'
+        ]);
+
+        Employee::factory(30)->create();
 
         Project::create([
             'client_id' => 1,
@@ -58,19 +68,6 @@ class DatabaseSeeder extends Seeder
             'deadline' => date_format(now()->addDays(7), 'Y-m-d'),
             'status' => ProjectStatus::INPROGRESS,
         ]);
-
-        Employee::create([
-            'name' => 'Fica',
-            'email' => 'fica@example.com',
-            'phone' => '123456'
-        ]);
-
-        Employee::create([
-            'name' => 'Misa',
-            'email' => 'misa@example.com',
-            'phone' => '4542456'
-        ]);
-
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
