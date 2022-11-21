@@ -36,6 +36,14 @@ class Client extends Model
         ];
     }
 
+    public function scopeFilter($query)
+    {
+        return $query
+            ->where('name', 'like', '%'.request('clientName').'%')
+            ->where('logo', 'like', '%'.request('logoExtension').'%')
+            ->when(request('website'), fn($query) => $query->where('website', 'like', '%'.request('website').'%'));
+    }
+
     protected function Slug() : Attribute
     {
         return Attribute::make(

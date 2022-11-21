@@ -30,10 +30,7 @@ class AdminController extends Controller
 
     public function clients()
     {
-        $clients = Client::where('name', 'like', '%'.request('clientName').'%')
-            ->where('logo', 'like', '%'.request('logoExtension').'%')
-            ->when(request('website'), fn($query) => $query->where('website', 'like', '%'.request('website').'%'))
-            ->get();
+        $clients = Client::filter()->get();
 
         return view('admins.clients', ['clients' => $clients]);
     }
