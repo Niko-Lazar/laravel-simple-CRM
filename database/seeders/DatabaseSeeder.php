@@ -47,27 +47,12 @@ class DatabaseSeeder extends Seeder
             'title' => 'project 1',
             'slug' => 'project1',
             'description' => 'a short project description',
-            'deadline' => date_format(now()->addDays(2), 'Y-m-d'),
-            'status' => ProjectStatus::INPROGRESS,
-        ]);
-
-        Project::create([
-            'client_id' => 1,
-            'title' => 'project 2',
-            'slug' => 'project2',
-            'description' => 'a short project description',
-            'deadline' => date_format(now()->addDays(2), 'Y-m-d'),
-            'status' => ProjectStatus::INPROGRESS,
-        ]);
-
-        Project::create([
-            'client_id' => 1,
-            'title' => 'project 3',
-            'slug' => 'project3',
-            'description' => 'a short project description',
             'deadline' => date_format(now()->addDays(7), 'Y-m-d'),
             'status' => ProjectStatus::INPROGRESS,
         ]);
+
+        Project::factory(30)->create();
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
