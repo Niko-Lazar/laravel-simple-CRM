@@ -49,6 +49,15 @@ class Employee extends Model
         ];
     }
 
+    public function scopeFilter($query)
+    {
+        return $query
+            ->where('name', 'like', '%'.request('name').'%')
+            ->where('email', 'like', '%'.request('email').'%')
+            ->where('phone', 'like', '%'.request('phone').'%')
+            ->when(request('role'), fn($query) => $query->where('role', 'like', '%'.request('role').'%'));
+    }
+
 
     // relations
     public function projects()

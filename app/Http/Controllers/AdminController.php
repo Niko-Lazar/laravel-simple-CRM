@@ -34,4 +34,11 @@ class AdminController extends Controller
 
         return view('admins.clients', ['clients' => $clients]);
     }
+
+    public function employees()
+    {
+        $employees = Employee::filter()->get();
+
+        return view('admins.employees', ['employees' => $employees]);
+    }
 }

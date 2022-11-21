@@ -15,6 +15,7 @@
                         <li><a class="dropdown-item" href="/admins/stats">Stats</a></li>
                         <li><a class="dropdown-item" href="/admins/projects">Projects</a></li>
                         <li><a class="dropdown-item" href="/admins/clients">Clients</a></li>
+                        <li><a class="dropdown-item" href="/admins/employees">Employees</a></li>
                     </ul>
                 </div>
                 <li class="nav-item">
