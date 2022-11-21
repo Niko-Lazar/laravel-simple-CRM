@@ -3,8 +3,7 @@
 
         <table>
             <tr class="bg-dark">
-                <form method="POST" action="/admins/projects">
-                    @csrf
+                <form method="GET" action="/admins/projects">
                     <tr>
                         <th>
                             <input
@@ -12,6 +11,7 @@
                                 name="projectName"
                                 placeholder="Project Name"
                                 value="{{ request('projectName') ?? null }}"
+                                >
                         </th>
                         <th>
                             <input
@@ -19,6 +19,7 @@
                                 name="clientName"
                                 placeholder="Client Name"
                                 value="{{ request('clientName') ?? null }}"
+                                >
                         </th>
                         <th>
                             <Select name="status">

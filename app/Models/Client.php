@@ -28,14 +28,13 @@ class Client extends Model
     // scopes
     public function scopeStats($query) : array
     {
+        $stats = DB::table('clients')->select(DB::raw('count(id) as totalClients, count(website) as numOfWebsites'))->get();
+
         return [
-            'totalClients' => DB::table('clients')->count(),
-            'numOfWebsites' => DB::table('clients')
-                ->whereNotNull('website')
-                ->count(),
+            'totalClients' => $stats[0]->totalClients,
+            'numOfWebsites' => $stats[0]->numOfWebsites
         ];
     }
-
 
     protected function Slug() : Attribute
     {

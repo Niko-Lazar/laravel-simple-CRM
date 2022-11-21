@@ -23,8 +23,18 @@ class AdminController extends Controller
 
     public function projects()
     {
-        $projects = Project::filter()->get();
 
+        $projects = Project::filter()->get();
         return view('admins.projects', ['projects' => $projects]);
+    }
+
+    public function clients()
+    {
+        $clients = Client::where('name', 'like', '%'.request('clientName').'%')
+            ->where('logo', 'like', '%'.request('logoExtension').'%')
+            ->when(request('website'), fn($query) => $query->where('website', 'like', '%'.request('website').'%'))
+            ->get();
+
+        return view('admins.clients', ['clients' => $clients]);
     }
 }

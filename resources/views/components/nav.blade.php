@@ -14,7 +14,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/admins/stats">Stats</a></li>
                         <li><a class="dropdown-item" href="/admins/projects">Projects</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="/admins/clients">Clients</a></li>
                     </ul>
                 </div>
                 <li class="nav-item">

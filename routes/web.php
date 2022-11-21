@@ -25,5 +25,5 @@ Route::resource('projects', ProjectController::class);
 Route::resource('employees', EmployeeController::class);
 
 Route::get('/admins/stats', [AdminController::class, 'stats']);
-Route::match(['get','post'], '/admins/projects', [AdminController::class, 'projects']);
-Route::match(['get','post'], '/admins/clients', [AdminController::class, 'clients']);
+Route::get('/admins/projects', [AdminController::class, 'projects']);
+Route::get( '/admins/clients', [AdminController::class, 'clients']);

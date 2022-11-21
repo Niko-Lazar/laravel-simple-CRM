@@ -34,15 +34,13 @@ class Employee extends Model
     // scopes
     public function scopeStats($query)
     {
+        $rolesCount = DB::table('employees')->select(DB::raw('count(role) as count'))->groupBy('role')->get();
+
         return [
-            'totalEmployees' =>DB::table('employees')
+            'totalEmployees' => DB::table('employees')
                 ->count(),
-            'numOfSuperiors' => DB::table('employees')
-                ->where('role', '=', ROLE::SUPERIOR)
-                ->count(),
-            'numOfEmployees' => DB::table('employees')
-                ->where('role', '=', ROLE::EMPLOYEE)
-                ->count(),
+            'numOfSuperiors' => $rolesCount[1]->count,
+            'numOfEmployees' => $rolesCount[0]->count,
             'employeesWithoutProjects' => DB::table('employees')
                 ->whereNotIn('id',
                     EmployeeProject::all()->pluck('employee_id')

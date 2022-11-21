@@ -47,6 +47,7 @@ class Project extends Model
         $dateFrom = request('dateFrom', '');
         $dateTo = request('dateTo', '');
         $status = request('status');
+        $search = request('search', '');
 
         $query->whereHas('client', function ($query) use ($clientName) {
             $query->where('name', 'like', '%' . $clientName . '%');
