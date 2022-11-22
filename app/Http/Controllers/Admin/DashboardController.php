@@ -7,7 +7,7 @@ use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Project;
 
-class AdminController extends Controller
+class DashboardController extends Controller
 {
     public function stats()
     {

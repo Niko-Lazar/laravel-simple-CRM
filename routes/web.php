@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ProjectController;
@@ -34,9 +34,9 @@ Route::middleware('auth')->group(function() {
     Route::resource('employees', EmployeeController::class);
 
     Route::prefix('admins')->group(function() {
-        Route::get('stats', [AdminController::class, 'stats']);
-        Route::get('projects', [AdminController::class, 'projects']);
-        Route::get('clients', [AdminController::class, 'clients']);
-        Route::get('employees', [AdminController::class, 'employees']);
+        Route::get('stats', [DashboardController::class, 'stats']);
+        Route::get('projects', [DashboardController::class, 'projects']);
+        Route::get('clients', [DashboardController::class, 'clients']);
+        Route::get('employees', [DashboardController::class, 'employees']);
     });
 });
