@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreProjectRequest;
-use App\Http\Requests\UpdateProjectRequest;
+use App\Enums\ProjectStatus;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\StoreProjectRequest;
+use App\Http\Requests\admin\UpdateProjectRequest;
 use App\Models\Client;
 use App\Models\Project;
-use App\Enums\ProjectStatus;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Enum;
 
 class ProjectController extends Controller
 {

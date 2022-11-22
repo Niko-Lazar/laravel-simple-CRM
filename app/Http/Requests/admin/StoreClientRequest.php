@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\admin;
 
-use App\Enums\ROLE;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
-class StoreEmployeeRequest extends FormRequest
+class StoreClientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +24,10 @@ class StoreEmployeeRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'name' => 'required|min:3|max:255',
-            'email' => 'required|email|min:3|max:255',
-            'phone' => 'required|numeric',
-            'role' => ['nullable', new Enum(ROLE::class)],
-            'employee_id' => 'nullable'
+            'name' => ['required', 'min:3', 'max:255'],
+            'logo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'slug' => ['required', 'min:3', 'max:255', 'unique:clients,slug'],
+            'website' => ['nullable']
         ];
     }
 }

@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Enums\ROLE;
-use App\Enums\ProjectStatus;
+use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Employee;
-use App\Models\EmployeeProject;
 use App\Models\Project;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -24,20 +21,20 @@ class AdminController extends Controller
     public function projects()
     {
 
-        $projects = Project::filter()->get();
+        $projects = Project::filter()->paginate(10)->withQueryString();
         return view('admins.projects', ['projects' => $projects]);
     }
 
     public function clients()
     {
-        $clients = Client::filter()->get();
+        $clients = Client::filter()->paginate(10)->withQueryString();
 
         return view('admins.clients', ['clients' => $clients]);
     }
 
     public function employees()
     {
-        $employees = Employee::filter()->get();
+        $employees = Employee::filter()->paginate(10)->withQueryString();
 
         return view('admins.employees', ['employees' => $employees]);
     }

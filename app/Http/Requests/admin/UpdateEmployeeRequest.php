@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\admin;
 
-use App\Models\Client;
+use App\Enums\ROLE;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
-class UpdateClientRequest extends FormRequest
+class UpdateEmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,14 @@ class UpdateClientRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules(): array
+    public function rules() : array
     {
         return [
             'name' => 'required|min:3|max:255',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'slug' => ['required', 'min:3', 'max:255', Rule::unique('clients', 'slug')->ignore($this->client)],
-            'website' => 'nullable'
+            'email' => 'required|email|min:3|max:255',
+            'phone' => 'required|numeric',
+            'role' => ['nullable', new Enum(ROLE::class)],
+            'employee_id' => 'nullable'
         ];
     }
 }

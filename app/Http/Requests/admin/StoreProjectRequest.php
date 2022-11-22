@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\admin;
 
 use App\Enums\ProjectStatus;
 use Illuminate\Foundation\Http\FormRequest;

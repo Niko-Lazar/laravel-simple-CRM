@@ -78,6 +78,7 @@
                     </ul>
                 </td>
             </tr>
+            <caption>{{ $projects->links() }}</caption>
         </table>
     </div>
 </x-layout>

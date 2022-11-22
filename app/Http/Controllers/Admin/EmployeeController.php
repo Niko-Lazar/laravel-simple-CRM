@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Enums\ROLE;
-use App\Http\Requests\StoreEmployeeRequest;
-use App\Http\Requests\UpdateEmployeeRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\StoreEmployeeRequest;
+use App\Http\Requests\admin\UpdateEmployeeRequest;
 use App\Models\Employee;
-use Illuminate\Validation\Rules\Enum;
 
 class EmployeeController extends Controller
 {

@@ -48,6 +48,7 @@
                     </ul>
                 </td>
             </tr>
+            <caption>{{ $employees->links() }}</caption>
         </table>
     </div>
 </x-layout>

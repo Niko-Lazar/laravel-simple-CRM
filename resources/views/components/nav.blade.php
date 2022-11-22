@@ -30,4 +30,23 @@
             </ul>
         </div>
     </div>
+
+    @auth
+        <div class="mr-4">
+            <form method="post" action="/logout">
+                @csrf
+                <button type="submit" name="submit" class="btn btn-secondary">logout</button>
+            </form>
+        </div>
+    @endauth
+    @guest
+        @if(!Route::is('login'))
+            <div class="mr-2">
+                <a href="{{ route('login') }}" class="btn btn-secondary">login</a>
+            </div>
+        @endif
+            <div class="mr-2">
+                <a href="/register" class="btn btn-secondary">Register</a>
+            </div>
+    @endguest
 </nav>

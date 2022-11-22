@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
-class StoreClientRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +26,8 @@ class StoreClientRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'logo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'slug' => ['required', 'min:3', 'max:255', 'unique:clients,slug'],
-            'website' => ['nullable']
+            'email' => ['required', 'email', 'min:3', 'max:255'],
+            'password' => ['required', Password::min(3)],
         ];
     }
 }

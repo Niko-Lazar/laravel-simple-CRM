@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\registerController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,14 +19,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Clients
-Route::resource('clients', ClientController::class);
-// Projects
-Route::resource('projects', ProjectController::class);
-// Employees
-Route::resource('employees', EmployeeController::class);
+Route::middleware('guest')->group(function() {
+    Route::get('/login', [SessionController::class, 'create'])->name('login');
+    Route::post('/login', [SessionController::class, 'store']);
+    Route::get('/register', [registerController::class, 'create']);
+    Route::post('/register', [registerController::class, 'store']);
+});
 
-Route::get('/admins/stats', [AdminController::class, 'stats']);
-Route::get('/admins/projects', [AdminController::class, 'projects']);
-Route::get( '/admins/clients', [AdminController::class, 'clients']);
-Route::get( '/admins/employees', [AdminController::class, 'employees']);
+Route::middleware('auth')->group(function() {
+    Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
+
+    Route::resource('clients', ClientController::class);
+    Route::resource('projects', ProjectController::class);
+    Route::resource('employees', EmployeeController::class);
+
+    Route::prefix('admins')->group(function() {
+        Route::get('stats', [AdminController::class, 'stats']);
+        Route::get('projects', [AdminController::class, 'projects']);
+        Route::get('clients', [AdminController::class, 'clients']);
+        Route::get('employees', [AdminController::class, 'employees']);
+    });
+});

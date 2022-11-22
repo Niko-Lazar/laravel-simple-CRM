@@ -40,7 +40,7 @@ class Client extends Model
     {
         return $query
             ->where('name', 'like', '%'.request('clientName').'%')
-            ->where('logo', 'like', '%'.request('logoExtension').'%')
+            ->where('logo', 'like', '%.'.request('logoExtension').'%')
             ->when(request('website'), fn($query) => $query->where('website', 'like', '%'.request('website').'%'));
     }
 
