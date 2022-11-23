@@ -15,10 +15,6 @@ class registerController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        if(!(request('key') === env('REGISTER_KEY'))){
-            return back();
-        }
-
         $attributes = $request->validated();
 
         User::create($attributes);

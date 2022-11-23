@@ -28,9 +28,13 @@ class SessionController extends Controller
         ])->onlyInput('email');
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
         auth()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
         return redirect()->route('login');
     }
