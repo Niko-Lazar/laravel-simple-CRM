@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ROLE;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\EmployeeController;
@@ -29,14 +30,16 @@ Route::middleware('guest')->group(function() {
 Route::middleware('auth')->group(function() {
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
-    Route::resource('clients', ClientController::class);
-    Route::resource('projects', ProjectController::class);
-    Route::resource('employees', EmployeeController::class);
+    Route::middleware('ensureUserHasRole:superadmin')->group(function() {
+        Route::resource('clients', ClientController::class);
+        Route::resource('projects', ProjectController::class);
+        Route::resource('employees', EmployeeController::class);
+    });
 
-    Route::prefix('admins')->group(function() {
-        Route::get('stats', [DashboardController::class, 'stats']);
-        Route::get('projects', [DashboardController::class, 'projects']);
-        Route::get('clients', [DashboardController::class, 'clients']);
-        Route::get('employees', [DashboardController::class, 'employees']);
+    Route::middleware('ensureUserHasRole:admin,viewer')->prefix('admins')->group(function() {
+            Route::get('stats', [DashboardController::class, 'stats']);
+            Route::get('projects', [DashboardController::class, 'projects']);
+            Route::get('clients', [DashboardController::class, 'clients']);
+            Route::get('employees', [DashboardController::class, 'employees']);
     });
 });

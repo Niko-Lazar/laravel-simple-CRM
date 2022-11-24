@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ROLE;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Project;
+use Illuminate\Validation\Rules\Enum;
 
 class DashboardController extends Controller
 {
@@ -20,7 +22,6 @@ class DashboardController extends Controller
 
     public function projects()
     {
-
         $projects = Project::filter()->paginate(10)->withQueryString();
         return view('admins.projects', ['projects' => $projects]);
     }
