@@ -30,7 +30,7 @@ Route::middleware('guest')->group(function() {
 Route::middleware('auth')->group(function() {
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
-    Route::middleware('ensureUserHasRole:superadmin')->group(function() {
+    Route::middleware('ensureUserHasRole:admin,viewer')->group(function() {
         Route::resource('clients', ClientController::class);
         Route::resource('projects', ProjectController::class);
         Route::resource('employees', EmployeeController::class);

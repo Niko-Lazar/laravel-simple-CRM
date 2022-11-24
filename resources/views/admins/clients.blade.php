@@ -24,12 +24,12 @@
                             </th>
                             <th>
                                 <select name="logoExtension">
-                                    <option value="" {{ request('logoExtension') == '' ? 'selected' : null }}>All</option>
-                                    <option value="jpg"{{ request('logoExtension') == 'jpg' ? 'selected' : null }}>jpg</option>
-                                    <option value="jpeg"{{ request('logoExtension') == 'jpeg' ? 'selected' : null }}>jpeg</option>
-                                    <option value="png"{{ request('logoExtension') == 'png' ? 'selected' : null }}>png</option>
-                                    <option value="gif"{{ request('logoExtension') == 'gif' ? 'selected' : null }}>gif</option>
-                                    <option value="svg"{{ request('logoExtension') == 'svg' ? 'selected' : null }}>svg</option>
+                                    <option value="" @selected(request('logoExtension') == '')>All</option>
+                                    <option value="jpg" @selected(request('logoExtension') == 'jpg')>jpg</option>
+                                    <option value="jpeg" @selected(request('logoExtension') == 'jpeg')>jpeg</option>
+                                    <option value="png" @selected(request('logoExtension') == 'png')>png</option>
+                                    <option value="gif" @selected(request('logoExtension') == 'gif')>gif</option>
+                                    <option value="svg" @selected(request('logoExtension') == 'svg')>svg</option>
                                 </select>
                             </th>
                             <th>
