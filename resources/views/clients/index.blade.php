@@ -12,7 +12,7 @@
                     @foreach($clients as $client)
                         <tr>
                             <td>
-                                <a href="/clients/{{ $client->slug }}"
+                                <a href="{{ route('clients.show', $client->slug) }}"
                                    class="btn btn-primary"
                                 >
                                     {{ $client->name }}
@@ -27,10 +27,10 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="/clients/{{ $client->slug }}/edit" class="btn btn-warning">Edit</a>
+                                <a href="{{ route('clients.edit', $client->slug) }}" class="btn btn-warning">Edit</a>
                             </td>
                             <td>
-                                <form method="POST" action="/clients/{{ $client->slug }}">
+                                <form method="POST" action="{{ route('clients.destroy', $client->slug) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -40,7 +40,7 @@
                     @endforeach
                 </table>
                 <div>
-                    <a href="/clients/create">add client</a>
+                    <a href="{{ route('clients.create') }}">add client</a>
                 </div>
                 <div class="mt-4">
                     {{ $clients->links() }}

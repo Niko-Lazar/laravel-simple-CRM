@@ -2,7 +2,7 @@
     <div class="container w-50">
         <div class="row">
             <h1 class="mb-4">Login</h1>
-            <form method="post" action="/login">
+            <form method="post" action="{{ route('login.store') }}">
                 @csrf
                 <!-- Email input -->
                 <div class="form-outline mb-4">

@@ -18,8 +18,9 @@ class EnsureUserHasRole
     public function handle(Request $request, Closure $next, string ...$roles)
     {
         if(!in_array($request->user()->role->value, $roles)) {
-            return redirect('/stats');
+            return redirect()->route('admins.dashboard.stats');
         }
+
         return $next($request);
     }
 }

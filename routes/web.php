@@ -20,26 +20,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('guest')->group(function() {
-    Route::get('/login', [SessionController::class, 'create'])->name('login');
-    Route::post('/login', [SessionController::class, 'store']);
-    Route::get('/register', [registerController::class, 'create']);
-    Route::post('/register', [registerController::class, 'store'])->middleware('allowRegister');
-});
-
-Route::middleware('auth')->group(function() {
-    Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
-
-    Route::middleware('ensureUserHasRole:admin,viewer')->group(function() {
-        Route::resource('clients', ClientController::class);
-        Route::resource('projects', ProjectController::class);
-        Route::resource('employees', EmployeeController::class);
+Route::prefix('admins')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [SessionController::class, 'create'])->name('login');
+        Route::post('/login', [SessionController::class, 'store'])->name('login.store');
+        Route::get('/register', [registerController::class, 'create'])->name('register.create');
+        Route::post('/register', [registerController::class, 'store'])->middleware('allowRegister')->name('register.store');;
     });
 
-    Route::middleware('ensureUserHasRole:admin,viewer')->prefix('admins')->group(function() {
-            Route::get('stats', [DashboardController::class, 'stats']);
-            Route::get('projects', [DashboardController::class, 'projects']);
-            Route::get('clients', [DashboardController::class, 'clients']);
-            Route::get('employees', [DashboardController::class, 'employees']);
+    Route::middleware('auth')->group(function () {
+        Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
+
+        Route::middleware('ensureUserHasRole:viewer,admin,superadmin')->group(function() {
+            Route::resource('clients', ClientController::class);
+            Route::resource('projects', ProjectController::class);
+            Route::resource('employees', EmployeeController::class);
+        });
+
+        Route::prefix('dashboard')->middleware('ensureUserHasRole:viewer,admins,superadmin')->group(function() {
+            Route::get('stats', [DashboardController::class, 'stats'])->name('admins.dashboard.stats');
+            Route::get('projects', [DashboardController::class, 'projects'])->name('admins.dashboard.projects');
+            Route::get('clients', [DashboardController::class, 'clients'])->name('admins.dashboard.clients');
+            Route::get('employees', [DashboardController::class, 'employees'])->name('admins.dashboard.employees');
+        });
     });
 });

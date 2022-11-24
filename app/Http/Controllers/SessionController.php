@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateLoginRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
@@ -20,7 +21,7 @@ class SessionController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->intended('admins/stats');
+            return redirect()->intended(route('admins.dashboard.stats'));
         }
 
         return back()->withErrors([

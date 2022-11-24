@@ -15,7 +15,7 @@
                     @foreach($employees as $employee)
                         <tr>
                             <td>
-                                <a class="btn btn-primary" href="/employees/{{ $employee->id }}">{{ $employee->name }}</a>
+                                <a class="btn btn-primary" href="{{ route('employees.show', $employee->id) }}">{{ $employee->name }}</a>
                             </td>
                             <td>{{ $employee->email }}</td>
                             <td>{{ $employee->phone }}</td>
@@ -30,10 +30,10 @@
                                 @endforeach
                             @endif
                             <td>
-                                <a class="btn btn-warning" href="/employees/{{ $employee->id }}/edit">Edit</a>
+                                <a class="btn btn-warning" href="{{ route('employees.edit', $employee->id) }}">Edit</a>
                             </td>
                             <td>
-                                <form method="POST" action="/employees/{{ $employee->id }}">
+                                <form method="POST" action="{{ route('employees.destroy', $employee->id) }}">
                                     @csrf
                                     @method('Delete')
                                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -43,7 +43,7 @@
                     @endforeach
                 </table>
                 <div>
-                    <a href="/employees/create">add employee</a>
+                    <a href="{{ route('employees.create') }}">add employee</a>
                 </div>
                 <div class="mt-4">
                     {{ $employees->links() }}

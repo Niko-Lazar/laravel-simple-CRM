@@ -16,7 +16,7 @@
                     @foreach($projects as $project)
                         <tr>
                             <td>
-                                <a href="/projects/{{ $project->slug }}"
+                                <a href="{{ route('projects.show', $project->slug) }}"
                                    class="btn btn-primary"
                                 >
                                     {{ $project->title }}
@@ -37,10 +37,10 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-warning" href="projects/{{ $project->slug }}/edit">Edit</a>
+                                <a class="btn btn-warning" href="{{ route('projects.edit', $project->slug) }}">Edit</a>
                             </td>
                             <td>
-                                <form action="projects/{{ $project->slug }}" method="post">
+                                <form action="{{ route('projects.destroy', $project->slug) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -50,7 +50,7 @@
                     @endforeach
                 </table>
                 <div>
-                    <a href="projects/create">add project</a>
+                    <a href="{{ route('projects.create') }}">add project</a>
                 </div>
                 <div class="mt-4">
                     {{ $projects->links() }}

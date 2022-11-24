@@ -1,7 +1,7 @@
 <x-layout>
     <div class="container w-50">
         <div class="row">
-            <form method="post" action="/register">
+            <form method="post" action="{{ route('register.store') }}">
                 @csrf
 
                 <div class="form-outline mb-4">

@@ -12,10 +12,10 @@
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/admins/stats">Stats</a></li>
-                        <li><a class="dropdown-item" href="/admins/projects">Projects</a></li>
-                        <li><a class="dropdown-item" href="/admins/clients">Clients</a></li>
-                        <li><a class="dropdown-item" href="/admins/employees">Employees</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admins.dashboard.stats') }}">Stats</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admins.dashboard.projects') }}">Projects</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admins.dashboard.clients') }}">Clients</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admins.dashboard.employees') }}">Employees</a></li>
                     </ul>
                 </div>
                 <li class="nav-item">
@@ -33,7 +33,7 @@
 
     @auth
         <div class="mr-4">
-            <form method="post" action="/logout">
+            <form method="post" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" name="submit" class="btn btn-secondary">logout</button>
             </form>

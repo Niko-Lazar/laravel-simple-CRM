@@ -17,7 +17,7 @@ class AllowToRegister
     public function handle(Request $request, Closure $next)
     {
         if($request->input('key') !== config('app.register_key')){
-            return (redirect('/register'));
+            return (redirect(route('register.create')));
         }
 
         return $next($request);

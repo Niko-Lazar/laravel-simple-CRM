@@ -3,7 +3,7 @@
 
         <table>
             <tr class="bg-dark">
-                <form method="GET" action="/admins/projects">
+                <form method="GET" action="{{ route('admins.dashboard.projects') }}">
                     <tr>
                         <th>
                             <input
