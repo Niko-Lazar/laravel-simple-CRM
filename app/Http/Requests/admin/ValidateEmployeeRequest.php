@@ -6,7 +6,7 @@ use App\Enums\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
-class StoreEmployeeRequest extends FormRequest
+class ValidateEmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +26,11 @@ class StoreEmployeeRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'name' => 'required|min:3|max:255',
-            'email' => 'required|email|min:3|max:255',
-            'phone' => 'required|numeric',
+            'name' => ['required', 'min:3', 'max:255'],
+            'email' => ['required', 'email', 'min:3', 'max:255'],
+            'phone' => ['required', 'numeric'],
             'role' => ['nullable', new Enum(Role::class)],
-            'employee_id' => 'nullable'
+            'employee_id' => ['nullable']
         ];
     }
 }
