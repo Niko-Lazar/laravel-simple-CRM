@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\admin;
 
-use App\Enums\ROLE;
+use App\Enums\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -29,7 +29,7 @@ class UpdateEmployeeRequest extends FormRequest
             'name' => 'required|min:3|max:255',
             'email' => 'required|email|min:3|max:255',
             'phone' => 'required|numeric',
-            'role' => ['nullable', new Enum(ROLE::class)],
+            'role' => ['nullable', new Enum(Role::class)],
             'employee_id' => 'nullable'
         ];
     }

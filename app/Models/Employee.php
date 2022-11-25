@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\ROLE;
+use App\Enums\Role;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +15,7 @@ class Employee extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'status' => ROLE::class
+        'status' => Role::class
     ];
 
     // accesors

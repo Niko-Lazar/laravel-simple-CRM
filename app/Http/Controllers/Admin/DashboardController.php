@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\ROLE;
+use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Employee;

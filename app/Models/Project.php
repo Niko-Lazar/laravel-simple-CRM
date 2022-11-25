@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\ROLE;
+use App\Enums\Role;
 use App\Enums\ProjectStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

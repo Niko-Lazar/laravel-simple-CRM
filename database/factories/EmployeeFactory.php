@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\ROLE;
+use App\Enums\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +21,7 @@ class EmployeeFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->email(),
             'phone' => fake()->phoneNumber(),
-            'role' => fake()->randomElement([ROLE::EMPLOYEE->value, ROLE::SUPERIOR->value]),
+            'role' => fake()->randomElement([Role::EMPLOYEE->value, Role::SUPERIOR->value]),
         ];
     }
 }

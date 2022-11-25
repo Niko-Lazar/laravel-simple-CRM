@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\ROLE;
+use App\Enums\Role;
 use Closure;
 use Illuminate\Http\Request;
 

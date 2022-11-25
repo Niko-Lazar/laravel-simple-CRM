@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Enums\ROLE;
+use App\Enums\Role;
 use App\Models\EmployeeProject;
 use Illuminate\Support\Facades\DB;
 
@@ -29,14 +29,14 @@ class ServiceEmployeeStats
     public function getSuperiors() : int
     {
         return DB::table('employees')
-            ->where('role', '=', ROLE::SUPERIOR)
+            ->where('role', '=', Role::SUPERIOR)
             ->count('role');
     }
 
     public function getEmployees() : int
     {
         return DB::table('employees')
-            ->where('role', '=', ROLE::EMPLOYEE)
+            ->where('role', '=', Role::EMPLOYEE)
             ->count('role');
     }
 

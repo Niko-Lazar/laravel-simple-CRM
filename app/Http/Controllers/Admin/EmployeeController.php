@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\ROLE;
+use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\StoreEmployeeRequest;
 use App\Http\Requests\admin\UpdateEmployeeRequest;
@@ -40,7 +40,7 @@ class EmployeeController extends Controller
     {
         return view('employees.edit', [
             'employee' => $employee,
-            'superiors' => Employee::where('role', ROLE::SUPERIOR)->get()
+            'superiors' => Employee::where('role', Role::SUPERIOR)->get()
         ]);
     }
 
