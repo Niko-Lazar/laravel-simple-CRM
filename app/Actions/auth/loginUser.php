@@ -2,7 +2,7 @@
 
 namespace App\Actions\auth;
 
-use App\Http\Requests\ValidateLoginRequest;
+use App\Http\Requests\admin\ValidateLoginRequest;
 use Illuminate\Support\Facades\Auth;
 
 class loginUser

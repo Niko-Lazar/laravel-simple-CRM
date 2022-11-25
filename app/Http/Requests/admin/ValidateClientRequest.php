@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\admin;
 
+use App\Models\Client;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreClientRequest extends FormRequest
+class ValidateClientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +27,8 @@ class StoreClientRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'logo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'slug' => ['required', 'min:3', 'max:255', 'unique:clients,slug'],
+            'logo' => $this->client ? ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'] : ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'slug' => ['required', 'min:3', 'max:255', Rule::unique('clients', 'slug')->ignore($this->client)],
             'website' => ['nullable']
         ];
     }

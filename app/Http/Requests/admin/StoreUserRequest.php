@@ -3,9 +3,9 @@
 namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
-class UpdateClientRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,12 @@ class UpdateClientRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules(): array
+    public function rules() : array
     {
         return [
-            'name' => 'required|min:3|max:255',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'slug' => ['required', 'min:3', 'max:255', Rule::unique('clients', 'slug')->ignore($this->client)],
-            'website' => 'nullable'
+            'name' => ['required', 'min:3', 'max:255'],
+            'email' => ['required', 'email', 'min:3', 'max:255'],
+            'password' => ['required', Password::min(3)],
         ];
     }
 }
