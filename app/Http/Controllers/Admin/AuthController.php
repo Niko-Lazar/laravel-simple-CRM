@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\auth\loginUser;
+use App\Actions\auth\logoutUser;
+use App\Actions\auth\registerUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\ValidateLoginRequest;
@@ -16,15 +19,11 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function register(StoreUserRequest $request)
+    public function register(StoreUserRequest $request, registerUser $registerUser)
     {
-        if(!(request('key') === config('app.register_key'))){
-            return back();
+        if(!$registerUser->handle($request)){
+            return redirect()->route('auth.register');
         }
-
-        $attributes = $request->validated();
-
-        User::create($attributes);
 
         return redirect()->route('login');
     }
@@ -34,29 +33,21 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(ValidateLoginRequest $request)
+    public function login(ValidateLoginRequest $request, loginUser $loginUser)
     {
-        $credentials = $request->validated();
-
-        if(Auth::attempt($credentials)) {
-
-            $request->session()->regenerate();
-
-            return redirect()->intended(route('admins.dashboard.stats'));
+        if(!$loginUser->handle($request))
+        {
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ])->onlyInput('email');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return redirect()->intended(route('admins.dashboard.stats'));
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request, logoutUser $logoutUser)
     {
-        auth()->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
+        $logoutUser->handle($request);
 
         return redirect()->route('login');
     }
