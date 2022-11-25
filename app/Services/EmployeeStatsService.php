@@ -6,7 +6,7 @@ use App\Enums\Role;
 use App\Models\EmployeeProject;
 use Illuminate\Support\Facades\DB;
 
-class ServiceEmployeeStats
+class EmployeeStatsService
 {
     public function getAll() : array
     {

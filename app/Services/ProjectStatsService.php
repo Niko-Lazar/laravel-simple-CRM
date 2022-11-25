@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Enums\ProjectStatus;
 use Illuminate\Support\Facades\DB;
 
-class ServiceProjectStats
+class ProjectStatsService
 {
     public function getAll() : array
     {

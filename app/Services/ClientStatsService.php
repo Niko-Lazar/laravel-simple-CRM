@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 
-class ServiceClientStats
+class ClientStatsService
 {
     public function getAll() : array
     {
