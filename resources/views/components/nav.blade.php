@@ -33,7 +33,7 @@
 
     @auth
         <div class="mr-4">
-            <form method="post" action="{{ route('logout') }}">
+            <form method="post" action="{{ route('auth.logout') }}">
                 @csrf
                 <button type="submit" name="submit" class="btn btn-secondary">logout</button>
             </form>
@@ -45,8 +45,10 @@
                 <a href="{{ route('login') }}" class="btn btn-secondary">login</a>
             </div>
         @endif
+        @if(!Route::is('auth.register.view'))
             <div class="mr-2">
-                <a href="/register" class="btn btn-secondary">Register</a>
+                <a href="{{ route('auth.register.view') }}" class="btn btn-secondary">Register</a>
             </div>
+        @endif
     @endguest
 </nav>
