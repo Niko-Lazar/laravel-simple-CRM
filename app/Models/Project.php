@@ -57,19 +57,6 @@ class Project extends Model
             ->when($dateFrom && $dateTo, fn($query) => $query->whereBetween('deadline', [$dateFrom, $dateTo]));
     }
 
-    public function scopeStats($query) : array
-    {
-        return [
-            'totalProjects' =>DB::table('projects')->count(),
-            'numOfFinished' => DB::table('projects')
-                ->where('status', '=', ProjectStatus::FINISHED)
-                ->count(),
-            'numOfInProgress' => DB::table('projects')
-                ->where('status', '=', ProjectStatus::INPROGRESS)
-                ->count(),
-        ];
-    }
-
     // relations
     public function client()
     {

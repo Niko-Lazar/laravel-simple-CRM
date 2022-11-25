@@ -26,16 +26,6 @@ class Client extends Model
     }
 
     // scopes
-    public function scopeStats($query) : array
-    {
-        $stats = DB::table('clients')->select(DB::raw('count(id) as totalClients, count(website) as numOfWebsites'))->get();
-
-        return [
-            'totalClients' => $stats[0]->totalClients,
-            'numOfWebsites' => $stats[0]->numOfWebsites
-        ];
-    }
-
     public function scopeFilter($query)
     {
         return $query

@@ -7,16 +7,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Project;
+use App\Services\ServiceClientStats;
+use App\Services\ServiceProjectStats;
+use App\Services\ServiceEmployeeStats;
 use Illuminate\Validation\Rules\Enum;
 
 class DashboardController extends Controller
 {
-    public function stats()
+    public function stats(ServiceProjectStats $projectStats, ServiceClientStats $clientStats, ServiceEmployeeStats $employeeStats)
     {
         return view('admins.index', [
-            'clients' => Client::stats(),
-            'projects' => Project::stats(),
-            'employees' => Employee::stats(),
+            'clients' => $clientStats->getAll(),
+            'projects' => $projectStats->getAll(),
+            'employees' => $employeeStats->getAll(),
         ]);
     }
 

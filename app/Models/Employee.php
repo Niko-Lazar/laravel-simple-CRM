@@ -32,23 +32,6 @@ class Employee extends Model
     }
 
     // scopes
-    public function scopeStats($query)
-    {
-        $rolesCount = DB::table('employees')->select(DB::raw('count(role) as count'))->groupBy('role')->get();
-
-        return [
-            'totalEmployees' => DB::table('employees')
-                ->count(),
-            'numOfSuperiors' => $rolesCount[1]->count,
-            'numOfEmployees' => $rolesCount[0]->count,
-            'employeesWithoutProjects' => DB::table('employees')
-                ->whereNotIn('id',
-                    EmployeeProject::all()->pluck('employee_id')
-                )
-                ->count()
-        ];
-    }
-
     public function scopeFilter($query)
     {
         return $query
@@ -57,7 +40,6 @@ class Employee extends Model
             ->where('phone', 'like', '%'.request('phone').'%')
             ->when(request('role'), fn($query) => $query->where('role', 'like', '%'.request('role').'%'));
     }
-
 
     // relations
     public function projects()
