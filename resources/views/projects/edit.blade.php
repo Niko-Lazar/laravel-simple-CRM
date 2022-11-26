@@ -52,19 +52,32 @@
                         id="deadline" required="required" aria-required="true">
                 </div>
 
-                <div class="formbuilder-checkbox-group form-group field-status">
-                    <label for="status" class="formbuilder-checkbox-group-label">Project status<span class="tooltip-element" tooltip="check if project is finished">?</span></label>
-                    <div class="checkbox-group">
-                        <div class="formbuilder-checkbox">
-                            <input
-                                name="status"
-                                access="false"
-                                id="status-0"
-                                value="finished"
-                                type="checkbox"
-                                {{ ($project->status->value == 'finished') ? 'checked' : null }}
-                            >
-                            <label for="status-0">Finished project</label>
+                <div class="rendered-form">
+                    <div class="formbuilder-radio-group form-group field-status">
+                        <label for="status" class="formbuilder-radio-group-label">Project status</label>
+                        <div class="radio-group">
+                            <div class="formbuilder-radio">
+                                <input
+                                    name="status"
+                                    access="false"
+                                    id="status-0"
+                                    value="finished"
+                                    type="radio"
+                                    {{ ($project->status->value == 'finished') ? 'checked' : null }}
+                                >
+                                <label for="status-0">Finished</label>
+                            </div>
+                            <div class="formbuilder-radio">
+                                <input
+                                    name="status"
+                                    access="false"
+                                    id="status-1"
+                                    value="in progress"
+                                    type="radio"
+                                    {{ ($project->status->value == 'in progress') ? 'checked' : null }}
+                                >
+                                <label for="status-1">In Progress</label>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\ValidateModel;
 use App\Actions\ValidateEmployee;
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,7 @@ class EmployeeController extends Controller
         return view('employees.create', ['superiors' => Employee::superiors()->get()]);
     }
 
-    public function store(ValidateEmployeeRequest $request, ValidateEmployee $validate)
+    public function store(ValidateEmployeeRequest $request, ValidateModel $validate)
     {
         Employee::create($validate->handle($request));
 
@@ -43,7 +44,7 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function update(Employee $employee, ValidateEmployeeRequest $request, ValidateEmployee $validate)
+    public function update(Employee $employee, ValidateEmployeeRequest $request, ValidateModel $validate)
     {
         $employee->update($validate->handle($request));
 

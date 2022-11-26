@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\ValidateModel;
 use App\Actions\ValidateProject;
 use App\Enums\ProjectStatus;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,7 @@ class ProjectController extends Controller
         return view('projects.create', ['clients' => Client::all()]);
     }
 
-    public function store(ValidateProjectRequest $request, ValidateProject $validateProject)
+    public function store(ValidateProjectRequest $request, ValidateModel $validateProject)
     {
         Project::create($validateProject->handle($request));
 
@@ -42,7 +43,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function update(Project $project, ValidateProjectRequest $request, ValidateProject $validateProject)
+    public function update(Project $project, ValidateProjectRequest $request, ValidateModel $validateProject)
     {
         $project->update($validateProject->handle($request));
 

@@ -36,21 +36,35 @@
                         access="false" id="phone" required="required" aria-required="true">
                 </div>
 
-                <div class="formbuilder-checkbox-group form-group field-superior">
-                    <label for="superior" class="formbuilder-checkbox-group-label">Role</label>
-                    <div class="checkbox-group">
-                        <div class="formbuilder-checkbox">
-                            <input
-                                name="role"
-                                access="false"
-                                id="superior-0"
-                                value="superior"
-                                type="checkbox"
-                                {{ ($employee->role == 'superior') ? 'checked' : null }}
-                            >
-                            <label for="superior-0">Superior</label>
+                <div class="rendered-form">
+                    <div class="formbuilder-radio-group form-group field-role">
+                        <label for="role" class="formbuilder-radio-group-label">Role</label>
+                        <div class="radio-group">
+                            <div class="formbuilder-radio">
+                                <input
+                                    name="role"
+                                    access="false"
+                                    id="role-0"
+                                    value="superior"
+                                    type="radio"
+                                    {{ ($employee->role == 'superior') ? 'checked' : null }}
+                                >
+                                <label for="role-0">Superior</label>
+                            </div>
+                            <div class="formbuilder-radio">
+                                <input
+                                    name="role"
+                                    access="false"
+                                    id="role-1"
+                                    value="employee"
+                                    type="radio"
+                                    {{ ($employee->role == 'employee') ? 'checked' : null }}
+                                >
+                                <label for="role-1">Employee</label>
+                            </div>
                         </div>
                     </div>
+                </div>
 
                     <div class="formbuilder-select form-group field-role mt-2">
                         <label for="role" class="formbuilder-select-label">Superior</label>

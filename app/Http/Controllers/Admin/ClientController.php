@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\ValidateModel;
 use App\Actions\ValidateClient;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ValidateClientRequest;
@@ -25,7 +26,7 @@ class ClientController extends Controller
         return view('clients.create');
     }
 
-    public function store(ValidateClient $validate, ValidateClientRequest $request)
+    public function store(ValidateModel $validate, ValidateClientRequest $request)
     {
         Client::create($validate->handle($request));
 
@@ -37,7 +38,7 @@ class ClientController extends Controller
         return view('clients.edit', ['client' => $client]);
     }
 
-    public function update(Client $client, ValidateClient $validate, ValidateClientRequest $request)
+    public function update(Client $client, ValidateModel $validate, ValidateClientRequest $request)
     {
         $attributes = $validate->handle($request);
 
