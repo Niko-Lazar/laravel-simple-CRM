@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
-class UpdateProjectRequest extends FormRequest
+class ValidateProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,12 +27,12 @@ class UpdateProjectRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'title' => 'required|min:3|max:255',
-            'slug' => ['required', Rule::unique('projects', 'slug')->ignoreModel($this->project)],
-            'description' =>'required|min:3|max:255',
-            'deadline' => 'required|date|after:today',
-            'client_id' => ['required', Rule::exists('clients', 'id')],
+            'title' => ['required', 'min:3', 'max:255'],
+            'slug' => ['required', 'min:3', 'max:255', Rule::unique('projects', 'slug')->ignore($this->project)],
+            'description' => ['required', 'min:3', 'max:255'],
+            'deadline' => ['required', 'date', 'after:today'],
             'status' => ['nullable', new Enum(ProjectStatus::class)],
+            'client_id' => ['required', Rule::exists('clients', 'id')]
         ];
     }
 }

@@ -27,7 +27,7 @@ class ValidateClientRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'logo' => $this->client ? ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'] : ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'logo' =>[Rule::requiredIf(fn() => !$this->client) ,'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'slug' => ['required', 'min:3', 'max:255', Rule::unique('clients', 'slug')->ignore($this->client)],
             'website' => ['nullable']
         ];
