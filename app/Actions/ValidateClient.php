@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Http\Requests\admin\ValidateClientRequest;
+use App\Http\Requests\Admin\ValidateClientRequest;
 
 class ValidateClient
 {

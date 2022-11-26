@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\ValidateClient;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\ValidateClientRequest;
-use App\Http\Requests\admin\UpdateClientRequest;
+use App\Http\Requests\Admin\ValidateClientRequest;
+use App\Http\Requests\Admin\UpdateClientRequest;
 use App\Models\Client;
 
 class ClientController extends Controller

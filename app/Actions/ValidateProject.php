@@ -3,7 +3,7 @@
 namespace App\Actions;
 
 use App\Enums\ProjectStatus;
-use App\Http\Requests\admin\ValidateProjectRequest;
+use App\Http\Requests\Admin\ValidateProjectRequest;
 
 class ValidateProject
 {

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Auth;
 
-use App\Http\Requests\admin\StoreUserRequest;
+use App\Http\Requests\Admin\StoreUserRequest;
 use App\Models\User;
 
 class registerUser

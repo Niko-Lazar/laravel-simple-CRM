@@ -6,8 +6,8 @@ use App\Actions\Auth\loginUser;
 use App\Actions\Auth\logoutUser;
 use App\Actions\Auth\registerUser;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\StoreUserRequest;
-use App\Http\Requests\admin\ValidateLoginRequest;
+use App\Http\Requests\Admin\StoreUserRequest;
+use App\Http\Requests\Admin\ValidateLoginRequest;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\ValidateProject;
 use App\Enums\ProjectStatus;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\ValidateProjectRequest;
-use App\Http\Requests\admin\UpdateProjectRequest;
+use App\Http\Requests\Admin\ValidateProjectRequest;
+use App\Http\Requests\Admin\UpdateProjectRequest;
 use App\Models\Client;
 use App\Models\Project;
 

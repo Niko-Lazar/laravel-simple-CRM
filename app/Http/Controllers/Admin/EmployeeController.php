@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\ValidateEmployee;
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\ValidateEmployeeRequest;
-use App\Http\Requests\admin\UpdateEmployeeRequest;
+use App\Http\Requests\Admin\ValidateEmployeeRequest;
+use App\Http\Requests\Admin\UpdateEmployeeRequest;
 use App\Models\Employee;
 
 class EmployeeController extends Controller

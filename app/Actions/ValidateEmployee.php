@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Http\Requests\admin\ValidateEmployeeRequest;
+use App\Http\Requests\Admin\ValidateEmployeeRequest;
 
 class ValidateEmployee
 {
