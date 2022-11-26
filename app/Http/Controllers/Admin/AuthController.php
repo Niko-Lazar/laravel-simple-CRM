@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\auth\loginUser;
-use App\Actions\auth\logoutUser;
-use App\Actions\auth\registerUser;
+use App\Actions\Auth\loginUser;
+use App\Actions\Auth\logoutUser;
+use App\Actions\Auth\registerUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\StoreUserRequest;
 use App\Http\Requests\admin\ValidateLoginRequest;

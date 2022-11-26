@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\auth;
+namespace App\Actions\Auth;
 
 use App\Http\Requests\admin\ValidateLoginRequest;
 use Illuminate\Support\Facades\Auth;
