@@ -17,13 +17,6 @@ class ValidateModel
             $attributes['logo'] = request()->file('logo')->store('logos');
         }
 
-        if(request('status')){
-            $attributes['status'] = request('status');
-        }
-
-        if(request('role')){
-            $attributes['role'] = request('role');
-        }
 
         return $attributes;
     }
