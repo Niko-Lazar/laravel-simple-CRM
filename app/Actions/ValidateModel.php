@@ -17,7 +17,6 @@ class ValidateModel
             $attributes['logo'] = request()->file('logo')->store('logos');
         }
 
-
         return $attributes;
     }
 }

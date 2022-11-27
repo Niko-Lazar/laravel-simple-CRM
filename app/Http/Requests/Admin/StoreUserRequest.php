@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\SecretKey;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -28,6 +29,7 @@ class StoreUserRequest extends FormRequest
             'name' => ['required', 'min:3', 'max:255'],
             'email' => ['required', 'email', 'min:3', 'max:255'],
             'password' => ['required', Password::min(3)],
+            'key' => ['required', 'string', new SecretKey]
         ];
     }
 }
