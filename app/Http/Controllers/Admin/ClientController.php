@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\CreateModel;
+use App\Actions\UpdateModel;
 use App\Actions\StoreFile;
-use App\Actions\ValidateModel;
-use App\Actions\ValidateClient;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ValidateClientRequest;
 use App\Http\Requests\Admin\UpdateClientRequest;
@@ -27,16 +27,9 @@ class ClientController extends Controller
         return view('clients.create');
     }
 
-    public function store(ValidateClientRequest $request, StoreFile $storeFile)
+    public function store(Client $client, ValidateClientRequest $request, CreateModel $createModel, StoreFile $storeFile)
     {
-
-        $attributes = $request->validated();
-
-        if(isset($attributes['logo'])) {
-            $attributes['logo'] = $storeFile->handle('logo', 'logos');
-        }
-
-        Client::create($attributes);
+        $createModel->handle($client, $request, $storeFile, 'logo', 'logo', 'logos');
 
         return redirect()->route('clients.index');
     }
@@ -46,15 +39,9 @@ class ClientController extends Controller
         return view('clients.edit', ['client' => $client]);
     }
 
-    public function update(Client $client, ValidateClientRequest $request)
+    public function update(Client $client, ValidateClientRequest $request, UpdateModel $updateModel, StoreFile $storeFile)
     {
-        $attributes = $request->validated();
-
-        if(isset($attributes['logo'])) {
-            $attributes['logo'] = $storeFile->handle('logo', 'logos');
-        }
-
-        $client->update($attributes);
+        $updateModel->handle($client, $request, $storeFile, 'logo', 'logo', 'logos');
 
         return redirect()->route('clients.index');
     }
