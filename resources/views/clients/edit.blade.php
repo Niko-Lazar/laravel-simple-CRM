@@ -23,12 +23,12 @@
                         name="logo"
                         access="false"
                         multiple="false" id="logo"
-                        @if(!$client->logo)
+                        @if(!$client->logo['path'])
                             required="required"
                         @endif
                         aria-required="true">
                     <img
-                        src="{{ asset('storage/' . $client->logo) }}"
+                        src="{{ asset('storage/' . $client->logo['path']) }}"
                         alt="logo" width="65px" height="64px"
                         class="rounded p-1"
                     >

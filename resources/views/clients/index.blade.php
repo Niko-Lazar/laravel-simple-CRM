@@ -18,7 +18,7 @@
                                     {{ $client->name }}
                                 </a>
                             </td>
-                            <td>{{ $client->logo }}</td>
+                            <td>{{ $client->logo['path'] }}</td>
                             <td>
                                 @if($client->website)
                                     {{ $client->website }}

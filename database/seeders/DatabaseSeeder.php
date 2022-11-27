@@ -3,11 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\Role;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Project;
 use Illuminate\Database\Seeder;
 use App\Enums\ProjectStatus;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,14 +23,22 @@ class DatabaseSeeder extends Seeder
         Client::create([
             'name' => 'Lazar',
             'slug' => 'laki',
-            'logo' => 'logos/lazar.jpeg',
+            'logo' => [
+                'path' => 'logos/4nNIHJTa2D0rRmJJ5ht3juoQJtXWLO95XysHfTlv.jpg',
+                'name' => 'logos/laki.jpeg',
+                'extension' => 'jpg',
+                'size' => '1024'],
             'website' => 'www.lazar.com',
         ]);
 
         Client::create([
             'name' => 'Pera',
             'slug' => 'peki',
-            'logo' => 'logos/pera.jpeg',
+            'logo' => [
+                'path' => 'logos/4nNIHJTa2D0rRmJJ5ht3juoQJtXWLO95XysHfTlv.jpg',
+                'name' => 'logos/pera.jpeg',
+                'extension' => 'jpg',
+                'size' => '1024'],
             'website' => 'www.pera.rs',
         ]);
 
@@ -55,9 +65,18 @@ class DatabaseSeeder extends Seeder
 
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+         \App\Models\User::factory()->create([
+             'name' => 'admin',
+             'email' => 'admin@admin.com',
+             'role' => ROLE::ADMIN,
+             'password' => 'admin',
+         ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'viewer',
+            'email' => 'viewer@admin.com',
+            'role' => ROLE::VIEWER,
+            'password' => 'viewer',
+        ]);
     }
 }

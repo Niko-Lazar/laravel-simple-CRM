@@ -29,9 +29,11 @@ class EmployeeController extends Controller
         return view('employees.create', ['superiors' => Employee::superiors()->get()]);
     }
 
-    public function store(ValidateEmployeeRequest $request, ValidateModel $validate)
+    public function store(ValidateEmployeeRequest $request)
     {
-        Employee::create($validate->handle($request));
+        $attributes = $request->validated();
+
+        Employee::create($attributes);
 
         return redirect()->route('employees.index');
     }
@@ -44,9 +46,11 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function update(Employee $employee, ValidateEmployeeRequest $request, ValidateModel $validate)
+    public function update(Employee $employee, ValidateEmployeeRequest $request)
     {
-        $employee->update($validate->handle($request));
+        $attributes = $request->validated();
+
+        $employee->update($attributes);
 
         return redirect()->route('employees.index');
     }

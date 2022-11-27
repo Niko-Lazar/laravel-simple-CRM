@@ -13,6 +13,10 @@ class Client extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'logo' => 'array',
+    ];
+
     public function getRouteKeyName(): string
     {
         return 'slug';

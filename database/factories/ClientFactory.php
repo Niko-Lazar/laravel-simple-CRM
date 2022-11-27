@@ -19,7 +19,11 @@ class ClientFactory extends Factory
         return [
             'slug' => fake()->unique()->word(),
             'name' => fake()->name(),
-            'logo' => fake()->imageUrl(),
+            'logo' => [
+                'path' => 'logos/4nNIHJTa2D0rRmJJ5ht3juoQJtXWLO95XysHfTlv.jpg',
+                'name' => 'logo.jpeg',
+                'extension' => 'jpg',
+                'size' => '1024'],
         ];
     }
 }

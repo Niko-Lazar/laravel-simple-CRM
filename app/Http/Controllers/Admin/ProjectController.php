@@ -28,9 +28,11 @@ class ProjectController extends Controller
         return view('projects.create', ['clients' => Client::all()]);
     }
 
-    public function store(ValidateProjectRequest $request, ValidateModel $validateProject)
+    public function store(ValidateProjectRequest $request)
     {
-        Project::create($validateProject->handle($request));
+        $attributes = $request->validated();
+
+        Project::create($attributes);
 
         return redirect()->route('projects.index');
     }
@@ -43,9 +45,11 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function update(Project $project, ValidateProjectRequest $request, ValidateModel $validateProject)
+    public function update(Project $project, ValidateProjectRequest $request)
     {
-        $project->update($validateProject->handle($request));
+        $attributes = $request->validated();
+
+        $project->update($attributes);
 
         return redirect()->route('projects.index');
     }

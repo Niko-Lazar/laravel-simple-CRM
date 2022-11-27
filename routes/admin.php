@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('employees', EmployeeController::class);
     });
 
-    Route::prefix('dashboard')->middleware('ensureUserHasRole:viewer,admins,superadmin')->group(function() {
+    Route::prefix('dashboard')->middleware('ensureUserHasRole:viewer,admin,superadmin')->group(function() {
         Route::get('stats', [DashboardController::class, 'stats'])->name('admins.dashboard.stats');
         Route::get('projects', [DashboardController::class, 'projects'])->name('admins.dashboard.projects');
         Route::get('clients', [DashboardController::class, 'clients'])->name('admins.dashboard.clients');
