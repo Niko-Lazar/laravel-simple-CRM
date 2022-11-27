@@ -16,7 +16,7 @@ class SecretKey implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        if(!(request('key') === config('app.register_key'))) {
+        if(!($value === config('app.register_key'))) {
             $fail('The :attribute is not correct');
         }
     }
