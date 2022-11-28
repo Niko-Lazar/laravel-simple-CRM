@@ -14,14 +14,14 @@
                     @foreach($clients as $client)
                         <tr>
                             <td>
-                                @can('view', $client)
+                                @can('view', App\Models\Client::class)
                                     <a href="{{ route('clients.show', $client->slug) }}"
                                        class="btn btn-primary"
                                     >
                                         {{ $client->name }}
                                     </a>
                                 @endcan
-                                @cannot('view', $client)
+                                @cannot('view', App\Models\Client::class)
                                         {{ $client->name }}
                                 @endcannot
                             </td>
@@ -48,7 +48,7 @@
                         </tr>
                     @endforeach
                 </table>
-                @can('create')
+                @can('create', App\Models\Client::class)
                     <div>
                         <a href="{{ route('clients.create') }}">add client</a>
                     </div>

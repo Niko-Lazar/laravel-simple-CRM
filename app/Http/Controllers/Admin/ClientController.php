@@ -23,20 +23,22 @@ class ClientController extends Controller
 
     public function show(Request $request, Client $client)
     {
-        $this->authorize('view', $client);
+        $this->authorize('view', Client::class);
 
         return view('clients.show', ['client' => $client]);
     }
 
     public function create()
     {
-        $this->authorize('create');
+        $this->authorize('create', Clinet::class);
 
         return view('clients.create');
     }
 
     public function store(Client $client, ValidateClientRequest $request, CreateModel $createModel, StoreFile $storeFile)
     {
+        $this->authorize('create', Clinet::class);
+
         $createModel->handle($client, $request, $storeFile, 'logo', 'logo', 'logos');
 
         return redirect()->route('clients.index');
@@ -44,14 +46,14 @@ class ClientController extends Controller
 
     public function edit(Client $client)
     {
-        $this->authorize('update', $client);
+        $this->authorize('update', Clinet::class);
 
         return view('clients.edit', ['client' => $client]);
     }
 
     public function update(Client $client, ValidateClientRequest $request, UpdateModel $updateModel, StoreFile $storeFile)
     {
-        $this->authorize('update', $client);
+        $this->authorize('update', Clinet::class);
 
         $updateModel->handle($client, $request, $storeFile, 'logo', 'logo', 'logos');
 
@@ -60,7 +62,7 @@ class ClientController extends Controller
 
     public function destroy(Client $client)
     {
-        $this->authorize('delete', $client);
+        $this->authorize('delete', Clinet::class);
 
         $client->delete();
 

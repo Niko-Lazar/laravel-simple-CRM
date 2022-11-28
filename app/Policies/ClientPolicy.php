@@ -30,7 +30,7 @@ class ClientPolicy
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user)
+    public function view(User $user) : Response
     {
         return (in_array($user->role, [Role::ADMIN, Role::SUPERADMIN]))
             ? Response::allow()
@@ -43,7 +43,7 @@ class ClientPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user) : Response
     {
         return ($user->role === Role::SUPERADMIN)
             ? Response::allow()
@@ -57,10 +57,10 @@ class ClientPolicy
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user)
+    public function update(User $user) : Response
     {
         return ($user->role === Role::SUPERADMIN)
-            ? true
+            ? Response::allow()
             : Response::deny('Only super admin can do that');
     }
 
@@ -71,10 +71,10 @@ class ClientPolicy
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user)
+    public function delete(User $user) : Response
     {
         return ($user->role === Role::SUPERADMIN)
-            ? true
+            ? Response::allow()
             : Response::deny('Only super admin can do that');
     }
 }

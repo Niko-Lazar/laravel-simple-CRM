@@ -9,6 +9,7 @@ class registerUser
 {
     public function handle(StoreUserRequest $request) : bool
     {
+
         $attributes = $request->validated();
 
         User::create($attributes);

@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Enums\Role;
 use App\Models\Client;
+use App\Models\Employee;
 use App\Models\User;
 use App\Policies\ClientPolicy;
+use App\Policies\EmployeePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\Response;
@@ -18,8 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Client::class => ClientPolicy::class,
+        Employee::class => EmployeePolicy::class,
     ];
 
     /**

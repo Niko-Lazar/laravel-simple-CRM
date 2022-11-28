@@ -27,11 +27,15 @@ class EmployeeController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Employee::class);
+
         return view('employees.create', ['superiors' => Employee::superiors()->get()]);
     }
 
     public function store(Employee $employee, ValidateEmployeeRequest $request, CreateModel $createModel)
     {
+        $this->authorize('create', Employee::class);
+
         $createModel->handle($employee, $request);
 
         return redirect()->route('employees.index');
@@ -39,6 +43,8 @@ class EmployeeController extends Controller
 
     public function edit(Employee $employee)
     {
+        $this->authorize('update', Employee::class);
+
         return view('employees.edit', [
             'employee' => $employee,
             'superiors' => Employee::where('role', Role::SUPERIOR)->get()
@@ -47,6 +53,8 @@ class EmployeeController extends Controller
 
     public function update(Employee $employee, ValidateEmployeeRequest $request, UpdateModel $updateModel)
     {
+        $this->authorize('update', Employee::class);
+
         $updateModel->handle($employee, $request);
 
         return redirect()->route('employees.index');
@@ -54,6 +62,8 @@ class EmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
+        $this->authorize('delete', Employee::class);
+
         $employee->delete();
 
         return redirect()->route('employees.index');
