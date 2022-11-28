@@ -7,16 +7,23 @@
                         <th>Name</th>
                         <th>Logo</th>
                         <th>Website</th>
-                        <th colspan="2">Action</th>
+                        @canany(['update', 'delete'], App\Models\Client::class)
+                            <th colspan="2">Action</th>
+                        @endcanany
                     </tr>
                     @foreach($clients as $client)
                         <tr>
                             <td>
-                                <a href="{{ route('clients.show', $client->slug) }}"
-                                   class="btn btn-primary"
-                                >
-                                    {{ $client->name }}
-                                </a>
+                                @can('view', $client)
+                                    <a href="{{ route('clients.show', $client->slug) }}"
+                                       class="btn btn-primary"
+                                    >
+                                        {{ $client->name }}
+                                    </a>
+                                @endcan
+                                @cannot('view', $client)
+                                        {{ $client->name }}
+                                @endcannot
                             </td>
                             <td>{{ $client->logo['path'] }}</td>
                             <td>
@@ -26,22 +33,26 @@
                                     no website
                                 @endif
                             </td>
-                            <td>
-                                <a href="{{ route('clients.edit', $client->slug) }}" class="btn btn-warning">Edit</a>
-                            </td>
-                            <td>
-                                <form method="POST" action="{{ route('clients.destroy', $client->slug) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">Delete</button>
-                                </form>
-                            </td>
+                            @canany(['update', 'delete'], App\Models\Client::class)
+                                <td>
+                                    <a href="{{ route('clients.edit', $client->slug) }}" class="btn btn-warning">Edit</a>
+                                </td>
+                                <td>
+                                    <form method="POST" action="{{ route('clients.destroy', $client->slug) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                            @endcanany
                         </tr>
                     @endforeach
                 </table>
-                <div>
-                    <a href="{{ route('clients.create') }}">add client</a>
-                </div>
+                @can('create')
+                    <div>
+                        <a href="{{ route('clients.create') }}">add client</a>
+                    </div>
+                @endcan
                 <div class="mt-4">
                     {{ $clients->links() }}
                 </div>

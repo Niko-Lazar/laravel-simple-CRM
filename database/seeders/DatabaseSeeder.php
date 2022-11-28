@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'viewer',
-            'email' => 'viewer@admin.com',
+            'email' => 'viewer@viewer.com',
             'role' => ROLE::VIEWER,
             'password' => 'viewer',
         ]);
