@@ -7,15 +7,15 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CreateModel
 {
-    public function handle(Model $model, FormRequest $request, ?StoreFile $storeFile = null, string $attribute = null, string $file = null, string $dir = null) : Model
+    public function __construct(StoreFile $storeFile)
+    {
+        $storeFile = new StoreFile();
+    }
+
+    public function handle(string $model, FormRequest $request) : Model
     {
         $attributes = $request->validated();
 
-        // find a better way
-        if($storeFile) {
-            $attributes[$attribute] = $storeFile->handle($file, $dir);
-        }
-
-        return $model->create($attributes);
+        return $model::create($attributes);
     }
 }
