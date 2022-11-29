@@ -36,6 +36,7 @@
                                     @endforeach
                                 @endif
                             </td>
+                            @can(['update', 'delete'], App\Models\Project::class)
                             <td>
                                 <a class="btn btn-warning" href="{{ route('projects.edit', $project->slug) }}">Edit</a>
                             </td>
@@ -46,12 +47,19 @@
                                     <button class="btn btn-danger" type="submit">Delete</button>
                                 </form>
                             </td>
+                            @elsecan('update', App\Models\Project::class)
+                                <td>
+                                    <a class="btn btn-warning" href="{{ route('projects.edit', $project->slug) }}">Edit</a>
+                                </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </table>
+                @canany(['update', 'delete'], App\Models\Employee::class)
                 <div>
                     <a href="{{ route('projects.create') }}">add project</a>
                 </div>
+                @endcanany
                 <div class="mt-4">
                     {{ $projects->links() }}
                 </div>
