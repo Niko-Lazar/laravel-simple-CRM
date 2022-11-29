@@ -36,7 +36,7 @@ class EmployeeController extends Controller
     {
         $this->authorize('create', Employee::class);
 
-        $createModel->handle($employee, $request);
+        $createModel->handle(Employee::class, $request);
 
         return redirect()->route('employees.index');
     }

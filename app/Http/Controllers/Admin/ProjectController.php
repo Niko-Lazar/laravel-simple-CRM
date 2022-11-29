@@ -31,7 +31,7 @@ class ProjectController extends Controller
 
     public function store(Project $project, ValidateProjectRequest $request, CreateModel $createModel)
     {
-        $createModel->handle($project, $request);
+        $createModel->handle(Project::class, $request);
 
         return redirect()->route('projects.index');
     }

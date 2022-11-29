@@ -30,32 +30,32 @@ class ClientController extends Controller
 
     public function create()
     {
-        $this->authorize('create', Clinet::class);
+        $this->authorize('create', Client::class);
 
         return view('clients.create');
     }
 
-    public function store(Client $client, ValidateClientRequest $request, CreateModel $createModel, StoreFile $storeFile)
+    public function store(ValidateClientRequest $request, CreateModel $createModel)
     {
-        $this->authorize('create', Clinet::class);
+        $this->authorize('create', Client::class);
 
-        $createModel->handle($client, $request, $storeFile, 'logo', 'logo', 'logos');
+        $createModel->handle(Client::class, $request);
 
         return redirect()->route('clients.index');
     }
 
     public function edit(Client $client)
     {
-        $this->authorize('update', Clinet::class);
+        $this->authorize('update', Client::class);
 
         return view('clients.edit', ['client' => $client]);
     }
 
-    public function update(Client $client, ValidateClientRequest $request, UpdateModel $updateModel, StoreFile $storeFile)
+    public function update(Client $client, ValidateClientRequest $request, UpdateModel $updateModel)
     {
-        $this->authorize('update', Clinet::class);
+        $this->authorize('update', Client::class);
 
-        $updateModel->handle($client, $request, $storeFile, 'logo', 'logo', 'logos');
+        $updateModel->handle($client, $request);
 
         return redirect()->route('clients.index');
     }
