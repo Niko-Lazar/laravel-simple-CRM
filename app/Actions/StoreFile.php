@@ -6,6 +6,10 @@ class storeFile
 {
     public function handle($requestedFile, string $dir) : array
     {
+        if(is_array($requestedFile)) {
+            return $requestedFile;
+        }
+
         if(!$requestedFile) {
             return [];
         }

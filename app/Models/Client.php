@@ -31,8 +31,9 @@ class Client extends Model
     }
 
     /**
+     *
      * Logo mutator
-     * Should be commented out before migration
+     *
      */
     protected function logo() : Attribute
     {
