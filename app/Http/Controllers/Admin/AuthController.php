@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\Auth\loginUser;
 use App\Actions\Auth\logoutUser;
-use App\Actions\Auth\registerUser;
 use App\Actions\CreateModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
