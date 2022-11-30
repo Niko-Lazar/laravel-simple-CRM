@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Client::class);
+    }
+
     public function index()
     {
         return view('clients.index', ['clients' => Client::simplePaginate(10)]);
@@ -23,22 +28,16 @@ class ClientController extends Controller
 
     public function show(Request $request, Client $client)
     {
-        $this->authorize('view', Client::class);
-
         return view('clients.show', ['client' => $client]);
     }
 
     public function create()
     {
-        $this->authorize('create', Client::class);
-
         return view('clients.create');
     }
 
     public function store(ValidateClientRequest $request, CreateModel $createModel)
     {
-        $this->authorize('create', Client::class);
-
         $createModel->handle(Client::class, $request);
 
         return redirect()->route('clients.index');
@@ -46,15 +45,11 @@ class ClientController extends Controller
 
     public function edit(Client $client)
     {
-        $this->authorize('update', Client::class);
-
         return view('clients.edit', ['client' => $client]);
     }
 
     public function update(Client $client, ValidateClientRequest $request, UpdateModel $updateModel)
     {
-        $this->authorize('update', Client::class);
-
         $updateModel->handle($client, $request);
 
         return redirect()->route('clients.index');
@@ -62,8 +57,6 @@ class ClientController extends Controller
 
     public function destroy(Client $client)
     {
-        $this->authorize('delete', Clinet::class);
-
         $client->delete();
 
         return redirect()->route('clients.index');

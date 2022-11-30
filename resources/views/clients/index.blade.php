@@ -7,7 +7,7 @@
                         <th>Name</th>
                         <th>Logo</th>
                         <th>Website</th>
-                        @canany(['update', 'delete'], App\Models\Client::class)
+                        @canany(['update', 'destroy'], App\Models\Client::class)
                             <th colspan="2">Action</th>
                         @endcanany
                     </tr>
@@ -33,7 +33,7 @@
                                     no website
                                 @endif
                             </td>
-                            @canany(['update', 'delete'], App\Models\Client::class)
+                            @canany(['update', 'destroy'], App\Models\Client::class)
                                 <td>
                                     <a href="{{ route('clients.edit', $client->slug) }}" class="btn btn-warning">Edit</a>
                                 </td>
