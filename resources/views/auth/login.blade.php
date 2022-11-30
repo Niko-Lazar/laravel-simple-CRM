@@ -35,6 +35,13 @@
                 <!-- Submit button -->
                 <button type="submit" name="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
             </form>
+            @if($errors->any())
+                <ul class="mt-3">
+                    @foreach($errors->all() as $error)
+                        <li class="text-danger">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
     </div>
 </x-layout>

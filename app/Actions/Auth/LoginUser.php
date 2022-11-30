@@ -4,10 +4,11 @@ namespace App\Actions\Auth;
 
 use App\Http\Requests\Admin\ValidateLoginRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class loginUser
 {
-    public function handle(ValidateLoginRequest $request) : bool
+    public function handle(ValidateLoginRequest $request) : void
     {
         $credentials = $request->validated();
 
@@ -15,9 +16,9 @@ class loginUser
 
             $request->session()->regenerate();
 
-            return true;
+            return;
         }
 
-        return false;
+        throw ValidationException::withMessages(['invalid credentials']);
     }
 }

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\Auth\loginUser;
 use App\Actions\Auth\logoutUser;
 use App\Actions\Auth\registerUser;
+use App\Actions\CreateModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\ValidateLoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -17,11 +19,9 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function register(StoreUserRequest $request, registerUser $registerUser)
+    public function register(StoreUserRequest $request, CreateModel $model)
     {
-        if(!$registerUser->handle($request)){
-            return redirect()->route('auth.register');
-        }
+        $model->handle(User::class, $request);
 
         return redirect()->route('login');
     }
@@ -33,14 +33,9 @@ class AuthController extends Controller
 
     public function login(ValidateLoginRequest $request, loginUser $loginUser)
     {
-        if(!$loginUser->handle($request))
-        {
-            return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
-            ])->onlyInput('email');
-        }
+        $loginUser->handle($request);
 
-        return redirect()->intended(route('admins.dashboard.stats'));
+        return redirect()->intended(route('admins.clients'));
     }
 
     public function logout(Request $request, logoutUser $logoutUser)
