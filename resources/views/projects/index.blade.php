@@ -11,7 +11,11 @@
                         <th>status</th>
                         <th>Client</th>
                         <th>Employees</th>
+                        @can(['update', 'delete'], App\ModelsProject::class)
                         <th colspan="2">Action</th>
+                        @elsecanany(['update', 'delete'], App\ModelsProject::class)
+                            <th>Action</th>
+                        @endcan
                     </tr>
                     @foreach($projects as $project)
                         <tr>
@@ -55,11 +59,11 @@
                         </tr>
                     @endforeach
                 </table>
-                @canany(['update', 'delete'], App\Models\Employee::class)
+                @can('create', App\Models\Employee::class)
                 <div>
                     <a href="{{ route('projects.create') }}">add project</a>
                 </div>
-                @endcanany
+                @endcan
                 <div class="mt-4">
                     {{ $projects->links() }}
                 </div>
