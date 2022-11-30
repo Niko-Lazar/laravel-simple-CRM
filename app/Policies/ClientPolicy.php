@@ -20,7 +20,7 @@ class ClientPolicy
         return null;
     }
 
-    public function viewAny(User $user)
+    public function viewAny(User $user) : bool
     {
         return true;
     }
@@ -37,17 +37,12 @@ class ClientPolicy
         return Response::deny('Only super admin can do that');
     }
 
-    public function edit(User $user, Client $client) : Response
-    {
-        return Response::deny('Only super admin can do that');
-    }
-
     public function update(User $user) : Response
     {
         return Response::deny('Only super admin can do that');
     }
 
-    public function delete(User $user, Client $client) : Response
+    public function delete(User $user) : Response
     {
         return Response::deny('Only super admin can do that');
     }
