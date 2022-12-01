@@ -50,6 +50,7 @@
                     </select>
                 </div>
 
+                @if($user->role->value === 'employee')
                 <div class="formbuilder-select form-group field-role mt-2">
                     <label for="role" class="formbuilder-select-label">Superior</label>
                     <select class="form-control" name="user_id" id="role">
@@ -63,6 +64,7 @@
                         @endforeach
                     </select>
                 </div>
+                @endif
 
                 <div class="formbuilder-button form-group field-submit mt-4">
                     <button type="submit" class="btn-info btn" name="submit" access="false" style="info" id="submit">
