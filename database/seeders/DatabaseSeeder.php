@@ -7,6 +7,7 @@ use App\Enums\Role;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Enums\ProjectStatus;
 use Illuminate\Support\Facades\Hash;
@@ -44,23 +45,6 @@ class DatabaseSeeder extends Seeder
 
         Client::factory(50)->create();
 
-        Employee::create([
-            'name' => 'Fica',
-            'email' => 'fica@example.com',
-            'phone' => '123456'
-        ]);
-
-        Employee::factory(30)->create();
-
-        Project::create([
-            'client_id' => 1,
-            'title' => 'project 1',
-            'slug' => 'project1',
-            'description' => 'a short project description',
-            'deadline' => date_format(now()->addDays(7), 'Y-m-d'),
-            'status' => ProjectStatus::INPROGRESS,
-        ]);
-
         Project::factory(30)->create();
 
         // \App\Models\User::factory(10)->create();
@@ -68,6 +52,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'superadmin',
             'email' => 'superadmin@admin.com',
+            'phone' => '000000',
             'role' => Role::SUPERADMIN,
             'password' => 'admin',
         ]);
@@ -76,6 +61,7 @@ class DatabaseSeeder extends Seeder
          \App\Models\User::factory()->create([
              'name' => 'admin',
              'email' => 'admin@admin.com',
+             'phone' => '000001',
              'role' => Role::ADMIN,
              'password' => 'admin',
          ]);
@@ -83,8 +69,19 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'viewer',
             'email' => 'viewer@viewer.com',
+            'phone' => '000002',
             'role' => Role::VIEWER,
             'password' => 'viewer',
         ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'viewer',
+            'email' => 'employee@employee.com',
+            'phone' => '000003',
+            'role' => Role::EMPLOYEE,
+            'password' => 'employee',
+        ]);
+
+        User::factory(6)->create();
     }
 }

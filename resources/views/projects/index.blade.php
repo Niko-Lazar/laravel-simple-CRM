@@ -59,7 +59,7 @@
                         </tr>
                     @endforeach
                 </table>
-                @can('create', App\Models\Employee::class)
+                @can('create', App\Models\Project::class)
                 <div>
                     <a href="{{ route('projects.create') }}">add project</a>
                 </div>

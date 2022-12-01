@@ -24,6 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'phone',
+        'user_id',
     ];
 
     /**
@@ -51,5 +54,44 @@ class User extends Authenticatable
         return Attribute::make(
             set: fn($value) => Hash::make($value)
         );
+    }
+
+    // accesors
+    protected function name() : Attribute
+    {
+        return Attribute::make(
+            get: fn($name) => ucwords($name),
+        );
+    }
+
+    public function scopeSuperiors($query)
+    {
+        return $query->where('role', '=', Role::SUPERIOR);
+    }
+
+    // scopes
+    public function scopeFilter($query)
+    {
+        return $query
+            ->where('name', 'like', '%'.request('name').'%')
+            ->where('email', 'like', '%'.request('email').'%')
+            ->where('phone', 'like', '%'.request('phone').'%')
+            ->when(request('role'), fn($query) => $query->where('role', 'like', '%'.request('role').'%'));
+    }
+
+    // relations
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
+    public function superiorTo()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function superior()
+    {
+        return $this->belongsTo(User::class, 'user_id')->withDefault(['name' => 'no superiors']);
     }
 }

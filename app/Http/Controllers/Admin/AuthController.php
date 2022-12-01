@@ -34,7 +34,7 @@ class AuthController extends Controller
     {
         $loginUser->handle($request);
 
-        return redirect()->intended(route('admins.clients'));
+        return redirect()->intended(route('clients.index'));
     }
 
     public function logout(Request $request, logoutUser $logoutUser)

@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Enums\Role;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
+use Illuminate\Validation\Rule;
 
-class ValidateEmployeeRequest extends FormRequest
+class validateProjectUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +22,11 @@ class ValidateEmployeeRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules() : array
+    public function rules()
     {
         return [
-            'name' => ['required', 'min:3', 'max:255'],
-            'email' => ['required', 'email', 'min:3', 'max:255'],
-            'phone' => ['required', 'numeric'],
-            'role' => ['nullable', new Enum(Role::class)],
-            'employee_id' => ['nullable']
+            'user_id' => ['required', Rule::exists('users', 'id')],
+            'project_id' => ['required', Rule::exists('projects', 'id')],
         ];
     }
 }

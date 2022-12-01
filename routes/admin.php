@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('ensureUserHasRole:viewer,admin,superadmin')->group(function() {
         Route::resource('clients', ClientController::class);
         Route::resource('projects', ProjectController::class);
-        Route::resource('employees', EmployeeController::class);
+        Route::resource('users', UserController::class);
     });
 
     Route::prefix('dashboard')->middleware('ensureUserHasRole:viewer,admin,superadmin')->group(function() {
