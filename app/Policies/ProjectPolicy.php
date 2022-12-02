@@ -12,14 +12,6 @@ class ProjectPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user) : null|bool
-    {
-        if($user->role === Role::SUPERADMIN) {
-            return true;
-        }
-        return null;
-    }
-
     public function viewAny(User $user) : bool
     {
         return true;

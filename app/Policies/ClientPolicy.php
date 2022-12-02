@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Enums\Role;
-use App\Models\Client;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
@@ -11,14 +10,6 @@ use Illuminate\Auth\Access\Response;
 class ClientPolicy
 {
     use HandlesAuthorization;
-
-    public function before(User $user) : null|bool
-    {
-        if($user->role === Role::SUPERADMIN) {
-            return true;
-        }
-        return null;
-    }
 
     public function viewAny(User $user) : bool
     {
