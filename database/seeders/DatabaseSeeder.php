@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'viewer',
+            'name' => 'employee',
             'email' => 'employee@employee.com',
             'phone' => '000003',
             'role' => Role::EMPLOYEE,

@@ -24,7 +24,7 @@ class UserPolicy
         return true;
     }
 
-    public function view(User $user) : Response
+    public function view(User $user) : bool
     {
         return true;
     }
