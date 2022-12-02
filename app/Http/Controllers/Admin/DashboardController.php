@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Project;
+use App\Models\User;
 use App\Services\ClientStatsService;
 use App\Services\ProjectStatsService;
 use App\Services\EmployeeStatsService;
@@ -37,7 +38,7 @@ class DashboardController extends Controller
 
     public function employees()
     {
-        $employees = Employee::filter()->paginate(10)->withQueryString();
+        $employees = User::where('role', '=', Role::EMPLOYEE)->orWhere('role', '=', Role::SUPERIOR)->filter()->paginate(10)->withQueryString();
 
         return view('admins.employees', ['employees' => $employees]);
     }

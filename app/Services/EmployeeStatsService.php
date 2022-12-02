@@ -11,6 +11,7 @@ class EmployeeStatsService
     public function getAll() : array
     {
         $rolesCount = DB::table('users')->where('role', '=', Role::EMPLOYEE)
+            ->orWhere('role', '=', Role::SUPERIOR)
             ->select(DB::raw('count(role) as count'))
             ->groupBy('role')->get();
 
@@ -26,6 +27,7 @@ class EmployeeStatsService
     {
         return DB::table('users')
             ->where('role', '=', Role::EMPLOYEE)
+            ->orWhere('role', '=', Role::SUPERIOR)
             ->count();
     }
 
@@ -46,7 +48,7 @@ class EmployeeStatsService
     public function getEmployeesWithoutProjects() : int
     {
         return DB::table('users')
-            ->whereNotIn('id', ProjectUser::all()->pluck('employee_id'))
+            ->whereNotIn('id', ProjectUser::all()->pluck('user_id'))
             ->count();
     }
 }

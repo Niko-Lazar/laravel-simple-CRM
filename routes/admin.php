@@ -22,7 +22,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-    Route::middleware('ensureUserHasRole:viewer,admin,superadmin')->group(function() {
+    Route::middleware('ensureUserHasRole:viewer,admin,superadmin,employee')->group(function() {
         Route::resource('clients', ClientController::class);
         Route::resource('projects', ProjectController::class);
         Route::resource('users', UserController::class);
