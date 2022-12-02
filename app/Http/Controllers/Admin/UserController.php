@@ -16,6 +16,11 @@ use App\Http\Requests\Admin\UpdateEmployeeRequest;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
     public function index()
     {
         return view('users.index', [

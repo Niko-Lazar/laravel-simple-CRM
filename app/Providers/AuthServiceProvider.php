@@ -4,11 +4,10 @@ namespace App\Providers;
 
 use App\Enums\Role;
 use App\Models\Client;
-use App\Models\Employee;
-use App\Models\Project;
 use App\Models\User;
+use App\Models\Project;
 use App\Policies\ClientPolicy;
-use App\Policies\EmployeePolicy;
+use App\Policies\UserPolicy;
 use App\Policies\ProjectPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -23,7 +22,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Client::class => ClientPolicy::class,
-        Employee::class => EmployeePolicy::class,
+        User::class => UserPolicy::class,
         Project::class => ProjectPolicy::class
     ];
 
