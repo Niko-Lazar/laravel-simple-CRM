@@ -31,6 +31,7 @@ class ValidateUserRequest extends FormRequest
             'email' => ['required', 'email', 'min:3', 'max:255'],
             'phone' => ['required', 'numeric'],
             'role' => ['nullable', new Enum(Role::class)],
+            'password' => ['nullable','min:3'],
             'user_id' => ['nullable', new MustBeAnEmployee]
         ];
     }

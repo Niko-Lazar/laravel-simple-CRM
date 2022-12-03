@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\UserCreated;
 use App\Models\Project;
 use App\Actions\CreateModel;
 use App\Actions\UpdateModel;
@@ -13,6 +14,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ValidateUserRequest;
 use App\Http\Requests\Admin\ValidateProjectUserRequest;
 use App\Http\Requests\Admin\UpdateEmployeeRequest;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -38,9 +42,15 @@ class UserController extends Controller
         return view('users.create', ['superiors' => User::superiors()->get()]);
     }
 
-    public function store(User $user, ValidateUserRequest $request, CreateModel $createModel)
+    public function store(ValidateUserRequest $request, CreateModel $createModel)
     {
-        $createModel->handle(User::class, $request);
+        $password = Str::random(32);
+        $attributes = $request->validated();
+        $attributes['password'] = $password;
+
+        $newUser = User::create($attributes);
+
+        Mail::to($newUser)->send(new UserCreated($newUser->email, $password));
 
         return redirect()->route('users.index');
     }
