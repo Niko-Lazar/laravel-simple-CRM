@@ -21,7 +21,7 @@ class ProjectController extends Controller
 
     public function index()
     {
-        return view('projects.index', ['projects' => Project::with('client')->simplePaginate(10)]);
+        return view('projects.index', ['projects' => Project::with(['client', 'employees'])->simplePaginate(10)]);
     }
 
     public function show(Project $project)
