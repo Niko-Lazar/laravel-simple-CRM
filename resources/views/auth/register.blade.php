@@ -14,6 +14,11 @@
                     <input type="email" name="email" id="email" class="form-control" />
                 </div>
 
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="phone">Phone</label>
+                    <input type="text" name="phone" id="phone" class="form-control" />
+                </div>
+
                 <!-- Password input -->
                 <div class="form-outline mb-4">
                     <label class="form-label" for="password">Password</label>
