@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\Auth\loginUser;
-use App\Actions\Auth\logoutUser;
+use App\Actions\Auth\LoginUser;
+use App\Actions\Auth\LogoutUser;
 use App\Actions\CreateModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
@@ -30,14 +30,14 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(ValidateLoginRequest $request, loginUser $loginUser)
+    public function login(ValidateLoginRequest $request, LoginUser $loginUser)
     {
         $loginUser->handle($request);
 
         return redirect()->intended(route('clients.index'));
     }
 
-    public function logout(Request $request, logoutUser $logoutUser)
+    public function logout(Request $request, LogoutUser $logoutUser)
     {
         $logoutUser->handle($request);
 

@@ -34,7 +34,7 @@ class ProjectController extends Controller
         return view('projects.create', ['clients' => Client::all()]);
     }
 
-    public function store(Project $project, ValidateProjectRequest $request, CreateModel $createModel)
+    public function store(ValidateProjectRequest $request, CreateModel $createModel)
     {
         $createModel->handle(Project::class, $request);
 
@@ -45,7 +45,7 @@ class ProjectController extends Controller
     {
         return view('projects.edit', [
             'project' => $project,
-            'clients' => Client::all()
+            'clients' => Client::select('id', 'name')->get(),
         ]);
     }
 

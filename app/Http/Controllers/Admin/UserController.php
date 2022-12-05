@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Mail\UserCreated;
-use App\Models\Project;
 use App\Actions\CreateModel;
 use App\Actions\UpdateModel;
-use App\Actions\ValidateEmployee;
 use App\Enums\Role;
-use App\Models\ProjectUser;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ValidateUserRequest;
-use App\Http\Requests\Admin\ValidateProjectUserRequest;
-use App\Http\Requests\Admin\UpdateEmployeeRequest;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
