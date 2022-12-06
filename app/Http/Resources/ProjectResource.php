@@ -24,6 +24,8 @@ class ProjectResource extends JsonResource
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'client' => $this->whenLoaded('client'),
+            'employees' => $this->whenLoaded('employees'),
         ];
     }
 }

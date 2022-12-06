@@ -25,5 +25,7 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 
 
 Route::middleware('auth:sanctum')->group(function() {
+
+    Route::get('search', [ProjectController::class, 'search']);
     Route::ApiResource('projects', ProjectController::class);
 });
