@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use App\Enums\Role;
-use App\Rules\MustBeAnEmployee;
+use App\Rules\MustBeSuperior;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -32,7 +32,7 @@ class ValidateUserRequest extends FormRequest
             'phone' => ['required', 'numeric'],
             'role' => ['nullable', new Enum(Role::class)],
             'password' => ['nullable','min:3'],
-            'user_id' => ['nullable', new MustBeAnEmployee]
+            'user_id' => ['nullable', new MustBeSuperior]
         ];
     }
 }

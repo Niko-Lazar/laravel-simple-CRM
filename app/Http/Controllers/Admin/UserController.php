@@ -7,6 +7,8 @@ use App\Actions\CreateModel;
 use App\Actions\UpdateModel;
 use App\Enums\Role;
 use App\Models\User;
+use App\Models\Project;
+use App\Enums\ProjectStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ValidateUserRequest;
 use Illuminate\Support\Facades\Mail;
@@ -52,9 +54,14 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        if(in_array($user->role, [Role::EMPLOYEE, Role::SUPERIOR], true)) {
+            $projects = Project::query()->where('status', '=', ProjectStatus::INPROGRESS)->select('id', 'title')->get();
+        }
+
         return view('users.edit', [
             'user' => $user,
             'superiors' => User::where('role', Role::SUPERIOR)->get(),
+            'projects' => $projects ?? null,
         ]);
     }
 

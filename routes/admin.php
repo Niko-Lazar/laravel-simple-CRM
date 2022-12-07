@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProjectUserController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
     Route::middleware('ensureUserHasRole:viewer,admin,superadmin,employee')->group(function() {
+        Route::get('project/{user}', [ProjectUserController::class, 'create'])->name('assignProject.create');
+        Route::post('project', [ProjectUserController::class, 'store'])->name('assignProject.store');
         Route::resource('clients', ClientController::class);
         Route::resource('projects', ProjectController::class);
         Route::resource('users', UserController::class);
